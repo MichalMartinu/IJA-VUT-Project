@@ -1,0 +1,32 @@
+package triangle.operations;
+
+import triangle.TriangleObject;
+
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+public class TriangleScale extends TriangleObject{
+    private double scaling;
+
+    public TriangleScale(SortedMap<String, Double> square, double scaling) {
+        super(square);
+        this.scaling = scaling;
+    }
+
+    public void execute() {
+        this.a =this.a * this.scaling;
+        this.b =this.b * this.scaling;
+        this.c =this.c * this.scaling;
+        this.a = Math.round(this.a * 1000000d)/1000000d;
+        this.b = Math.round(this.b * 1000000d)/1000000d;
+        this.c = Math.round(this.c * 1000000d)/1000000d;
+    }
+
+    public SortedMap<String, Double> objectActualValue(){
+        SortedMap<String, Double> result = new TreeMap<>();
+        result.put("a", this.a);
+        result.put("b", this.b);
+        result.put("c", this.c);
+        return result;
+    }
+}
