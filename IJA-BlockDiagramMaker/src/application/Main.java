@@ -1,9 +1,11 @@
-package Application;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -16,7 +18,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Block scheme maker");
-        primaryStage.setScene(new Scene(root, 1000, 600));
+
+        //Make scene full screen
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        Scene scene = new Scene(root,  screenBounds.getWidth(), screenBounds.getHeight());
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
