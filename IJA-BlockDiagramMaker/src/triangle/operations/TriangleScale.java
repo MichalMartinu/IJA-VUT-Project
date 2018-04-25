@@ -22,11 +22,5 @@ public class TriangleScale extends TriangleObject{
         this.c = Math.round(this.c * 1000000d)/1000000d;
     }
 
-    public SortedMap<String, Double> objectActualValue(){
-        SortedMap<String, Double> result = new TreeMap<>();
-        result.put("a", this.a);
-        result.put("b", this.b);
-        result.put("c", this.c);
-        return result;
-    }
+
 }

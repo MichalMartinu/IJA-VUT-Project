@@ -15,6 +15,8 @@ public abstract class RectangleObject extends AbstractBlock {
     }
     public abstract void execute();
 
-    public abstract SortedMap<String, Double> objectActualValue();
+    public void check() throws Exception {
+
+    }
 
 }

@@ -7,21 +7,17 @@ import java.util.TreeMap;
 
 public class SquareArea extends SquareObject {
 
-    private double result;
+    public SquareArea() {
 
-    public SquareArea(SortedMap<String, Double> square) {
-        super(square);
     }
+
 
     public void execute()
     {
-        this.result = Math.pow(this.a, 2);
-        this.result = Math.round(this.result * 1000000d)/1000000d;
-    }
-
-    public SortedMap<String, Double> objectActualValue(){
-        SortedMap<String, Double> result = new TreeMap<>();
-        result.put("result", this.result);
-        return result;
+        double result;
+        result = Math.pow(this.a, 2);
+        result = Math.round(result * 1000000d)/1000000d;
+        this.output = result;
+        this.state = "done";
     }
 }

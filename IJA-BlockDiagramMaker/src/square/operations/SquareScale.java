@@ -9,19 +9,13 @@ public class SquareScale extends SquareObject{
 
     private double scaling;
 
-    public SquareScale(SortedMap<String, Double> square, double scaling) {
-        super(square);
+    public SquareScale(double scaling) {
         this.scaling = scaling;
     }
 
     public void execute() {
         this.a =this.a * this.scaling;
         this.a = Math.round(this.a * 1000000d)/1000000d;
-    }
-
-    public SortedMap<String, Double> objectActualValue(){
-        SortedMap<String, Double> result = new TreeMap<>();
-        result.put("a", this.a);
-        return result;
+        this.state = "done";
     }
 }

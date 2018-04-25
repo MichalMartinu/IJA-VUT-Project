@@ -39,9 +39,5 @@ public class TriangleGetAngle extends TriangleObject {
         return Math.acos(result);
     }
 
-    public SortedMap<String, Double> objectActualValue(){
-        SortedMap<String, Double> result = new TreeMap<>();
-        result.put("result", this.result);
-        return result;
-    }
+
 }

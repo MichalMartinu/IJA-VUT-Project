@@ -22,10 +22,5 @@ public class RectangleScale extends RectangleObject{
         this.b = Math.round(this.b * 1000000d)/1000000d;
     }
 
-    public SortedMap<String, Double> objectActualValue(){
-        SortedMap<String, Double> result = new TreeMap<>();
-        result.put("a", this.a);
-        result.put("b", this.b);
-        return result;
-    }
+
 }
