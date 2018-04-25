@@ -33,13 +33,12 @@ public class CollectorTests {
 
         Assert.assertEquals((Double) (16.0), (Double) ok.getOutputResult());
 
-        blocksCollector.setConnection(3,1, "a");
+        blocksCollector.setConnection(2,0, "a");
 
-        Assert.assertEquals(3,blocksCollector.getBlock(1).getInput());
+        Assert.assertEquals(2,blocksCollector.getBlock(0).getInput());
+
         DrawScheme hej = new DrawScheme();
-        hej.drawBlock(block);
-
-
+        hej.drawScene(blocksCollector);
     }
 
 

@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class Collector {
     protected ArrayList<AbstractBlock> blocks = new ArrayList<AbstractBlock>();
-
+    int counter;
    //protected SortedMap<String, AbstractBlock> blocks = new TreeMap<>();
 
     public Collector() {
@@ -19,6 +19,7 @@ public class Collector {
 
     public void setBlock(AbstractBlock block) {
         this.blocks.add(block);
+        this.counter +=1;
     }
 
     public AbstractBlock getBlock(int key)
@@ -26,8 +27,17 @@ public class Collector {
         return this.blocks.get(key);
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
     public void setConnection(int output, int input, String as){
-        getBlock(input).setInput(output);
+        if (output < blocks.size() && input < blocks.size())
+        {
+            getBlock(input).setInput(output);
+        }
+        //TODO Errror
+
         if (as == "a")
         {
             getBlock(input).setA(0.0);
@@ -40,6 +50,7 @@ public class Collector {
         {
             getBlock(input).setC(0.0);
         }
+        //TODO Error
     }
 
 }

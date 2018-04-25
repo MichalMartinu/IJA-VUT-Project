@@ -16,7 +16,8 @@ public abstract class AbstractBlock implements Block{
 
     public AbstractBlock()
     {
-        super();
+        output = -1;
+        input = -1;
     }
 
     public abstract void execute();
