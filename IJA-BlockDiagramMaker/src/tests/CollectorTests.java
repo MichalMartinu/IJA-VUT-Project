@@ -1,5 +1,6 @@
 package tests;
 
+import actions.DrawScheme;
 import block.AbstractBlock;
 import collector.Collector;
 
@@ -12,25 +13,32 @@ public class CollectorTests {
 
 
     @Test
-    public void AddBlocks()
+    public void blocks()
     {
         AbstractBlock block;
 
         Collector blocksCollector = new Collector();
         block = new SquareDiagonal();
-        blocksCollector.setBlock("1", block);
+        blocksCollector.setBlock(block);
         block = new SquareArea();
-        blocksCollector.setBlock("6", block);
+        blocksCollector.setBlock(block);
         block = new SquareHeight();
-        blocksCollector.setBlock("2", block);
+        blocksCollector.setBlock( block);
 
 
         AbstractBlock ok;
-        ok = blocksCollector.getBlock("2");
+        ok = blocksCollector.getBlock(1);
         ok.setA(4.0);
         ok.execute();
 
-        Assert.assertEquals((Double) (4.0), (Double) ok.getOutput());
+        Assert.assertEquals((Double) (16.0), (Double) ok.getOutputResult());
+
+        blocksCollector.setConnection(3,1, "a");
+
+        Assert.assertEquals(3,blocksCollector.getBlock(1).getInput());
+        DrawScheme hej = new DrawScheme();
+        hej.drawBlock(block);
+
 
     }
 

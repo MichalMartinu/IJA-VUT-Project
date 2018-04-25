@@ -4,9 +4,15 @@ import blockInterface.Block;
 
 public abstract class AbstractBlock implements Block{
     protected double a;
-    protected double output;
-    protected double input;
+    protected double b;
+    protected double c;
+    protected double outputResult;
+
+    protected int output;
+    protected int input;
+
     protected String state;
+    protected String type;
 
     public AbstractBlock()
     {
@@ -25,19 +31,39 @@ public abstract class AbstractBlock implements Block{
         this.a = a;
     }
 
-    public double getOutput() {
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public void setC(double c) {
+        this.c = c;
+    }
+
+    public double getOutputResult() {
+        return outputResult;
+    }
+
+    public int getOutput() {
         return output;
     }
 
-    public void setOutput(double output) {
+    public void setOutput(int output) {
         this.output = output;
     }
 
-    public double getInput() {
+    public int getInput() {
         return input;
     }
 
-    public void setInput(double input) {
+    public void setInput(int input) {
         this.input = input;
     }
 
@@ -50,5 +76,8 @@ public abstract class AbstractBlock implements Block{
         this.state = state;
     }
 
+    public String getType() {
+        return type;
+    }
 
 }

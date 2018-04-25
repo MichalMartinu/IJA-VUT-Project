@@ -1,4 +1,4 @@
-package tests;
+/*package tests;
 
 import org.junit.Assert;
 
@@ -37,5 +37,5 @@ public class ConnectTests {
     }
 
 
-}
+}*/
 

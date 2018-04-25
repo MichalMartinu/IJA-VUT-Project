@@ -2,8 +2,6 @@ package tests;
 
 import org.junit.Assert;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
 import org.junit.Test;
 
 import square.operations.*;
@@ -33,7 +31,7 @@ public class BlockTests {
         block.check();
         block.execute();
         Assert.assertEquals("done", block.getState());
-        Assert.assertEquals((Double) (25.0), (Double) block.getOutput());
+        Assert.assertEquals((Double) (25.0), (Double) block.getOutputResult());
     }
 }
 
