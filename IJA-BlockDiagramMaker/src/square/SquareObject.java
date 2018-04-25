@@ -5,10 +5,7 @@ import block.AbstractBlock;
 import java.util.SortedMap;
 
 public abstract class SquareObject extends AbstractBlock {
-    protected double a;
-    protected double output;
-    protected double input;
-    protected String state;
+
 
     public SquareObject() {
         this.a = -1.0;
@@ -24,36 +21,5 @@ public abstract class SquareObject extends AbstractBlock {
 
     public abstract void execute();
 
-    public double getA() {
-        return a;
-    }
 
-    public void setA(double a) {
-        this.a = a;
-    }
-
-    public double getOutput() {
-        return output;
-    }
-
-    public void setOutput(double output) {
-        this.output = output;
-    }
-
-    public double getInput() {
-        return input;
-    }
-
-    public void setInput(double input) {
-        this.input = input;
-    }
-
-    public String getState() {
-
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 }
