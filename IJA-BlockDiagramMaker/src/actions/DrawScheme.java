@@ -63,15 +63,17 @@ public class DrawScheme {
         if (block.getOutput() > blockIndex)
         {
             direction="higher";
+            for (int i = 0; i < blockIndex; i++) {
+
+                type = "empty";
+
+                block = collector.getBlock(i);
+                addToIndex(Lines.leftLine(block, type, blockIndex), i * 6);
+            }
         }
         else
         {
             direction = "smaller";
-
-
-        }
-
-        if (block.getOutput() > 0) {
             for (int i = 0; i < block.getOutput(); i++) {
 
                 type = "empty";
@@ -80,6 +82,8 @@ public class DrawScheme {
                 addToIndex(Lines.leftLine(block, type, blockIndex), i * 6);
             }
         }
+
+
 
         block = collector.getBlock(blockIndex);
 
@@ -120,12 +124,26 @@ public class DrawScheme {
             addToIndex(Lines.leftLine(block, type, blockIndex), index*6);
         }
 
-        type = "empty";
-        for (int i = blockIndex+1; i < collector.getCounter(); i++)
+        if (direction.equals("higher"))
         {
-            block = collector.getBlock(i);
-            addToIndex(Lines.leftLine(block, type, output), i*6);
+            block = collector.getBlock(blockIndex);
+            type = "empty";
+            for (int i = block.getOutput()+1; i < collector.getCounter(); i++)
+            {
+                block = collector.getBlock(i);
+                addToIndex(Lines.leftLine(block, type, output), i*6);
+            }
         }
+        else
+        {
+            type = "empty";
+            for (int i = blockIndex+1; i < collector.getCounter(); i++)
+            {
+                block = collector.getBlock(i);
+                addToIndex(Lines.leftLine(block, type, output), i*6);
+            }
+        }
+
     }
 
 

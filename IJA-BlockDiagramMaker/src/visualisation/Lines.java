@@ -97,6 +97,7 @@ public class Lines {
     public static ArrayList<String> emptyConnection(Collector collector){
         ArrayList<String> output = new ArrayList<String>();
         AbstractBlock block;
+        int j = 0;
         for (int i = 0; i < collector.getCounter(); i++)
         {
             block=collector.getBlock(i);
@@ -108,10 +109,24 @@ public class Lines {
             output.add("  ");
             output.add("  ");
 
-            if (block.getInput() != -1 && i < block.getInput())
+            if(block.getOutput() < i)
             {
-                output.set(i*6+4, "");
+                if (block.getInput() != -1)
+                {
+                    output.set(j+4, "");
+                }
             }
+            else
+            {
+                if (block.getInput() != -1)
+                {
+                    output.set(j+4, "");
+                }
+            }
+
+
+
+            j+=6;
 
         }
 
