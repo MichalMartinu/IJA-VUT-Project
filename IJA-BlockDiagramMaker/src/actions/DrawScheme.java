@@ -12,16 +12,38 @@ import java.util.TreeMap;
 public class DrawScheme {
     ArrayList<String> output = new ArrayList<String>();
 
+
     public void drawScene(Collector collector){
+        output.clear();
+
+        makeArrayList();
+        AbstractBlock block;
         initScene(collector.getCounter());
-        //TODO daky for
         int j = 0;
         for (int i = 0; i<collector.getCounter(); i++)
         {
-            drawConnectionLineIn(collector.getBlock(i), j);
-            drawBlock(collector.getBlock(i), j);
+            block=collector.getBlock(i);
+            drawConnectionLineIn(block, j);
+            drawBlock(block, j);
+
             j += 6;
         }
+        j = 0;
+        for (int i = 0; i<collector.getCounter(); i++)
+        {
+            block=collector.getBlock(i);
+            if (block.getOutput() != -1)
+            {
+                drawConnectionLineLeft(collector, i, j);
+            }
+            else
+            {
+                addToIndex(Lines.emptyConnection(collector), 0);
+            }
+
+            j += 6;
+        }
+
 
         for (int i = 0; i <  this.output.size(); i++) {
             System.out.println( this.output.get(i));
@@ -32,10 +54,83 @@ public class DrawScheme {
         addToIndex(Lines.inputLine(block), index);
     }
 
+    public void drawConnectionLineLeft(Collector collector, int blockIndex, int index){
+        AbstractBlock block = collector.getBlock(blockIndex);
+        String type;
+        String direction;
+        int output =  block.getOutput();
+
+        if (block.getOutput() > blockIndex)
+        {
+            direction="higher";
+        }
+        else
+        {
+            direction = "smaller";
+
+
+        }
+
+        if (block.getOutput() > 0) {
+            for (int i = 0; i < block.getOutput(); i++) {
+
+                type = "empty";
+
+                block = collector.getBlock(i);
+                addToIndex(Lines.leftLine(block, type, blockIndex), i * 6);
+            }
+        }
+
+        block = collector.getBlock(blockIndex);
+
+
+        if (direction.equals("higher")) {
+            type = "outD";
+            addToIndex(Lines.leftLine(block, type,blockIndex), index);
+        } else {
+            type = "outP";
+            addToIndex(Lines.leftLine(block, type, blockIndex), index);
+        }
+
+        type="full";
+        if (direction.equals("higher")) {
+            for (int i = blockIndex+1; i < block.getOutput(); i++)
+            {
+                block = collector.getBlock(i);
+                addToIndex(Lines.leftLine(block, type, blockIndex), i*6);
+            }
+        } else {
+            for (int i = block.getOutput()+1; i < blockIndex; i++)
+            {
+                block = collector.getBlock(i);
+                addToIndex(Lines.leftLine(block, type, blockIndex), i*6);
+            }
+        }
+
+        block = collector.getBlock(blockIndex);
+        index = block.getOutput();
+        block = collector.getBlock(block.getOutput());
+
+        if (direction.equals("higher")) {
+            type = "inP";
+            addToIndex(Lines.leftLine(block, type, blockIndex), index*6);
+        } else {
+
+            type = "inD";
+            addToIndex(Lines.leftLine(block, type, blockIndex), index*6);
+        }
+
+        type = "empty";
+        for (int i = blockIndex+1; i < collector.getCounter(); i++)
+        {
+            block = collector.getBlock(i);
+            addToIndex(Lines.leftLine(block, type, output), i*6);
+        }
+    }
+
 
     public void drawBlock(AbstractBlock block, int index)
     {
-        //TODO change index and delete hej
         addToIndex(Blocks.getBlock(block), index);
     }
 
@@ -53,5 +148,10 @@ public class DrawScheme {
         {
             this.output.add("");
         }
+    }
+
+    public void makeArrayList()
+    {
+
     }
 }

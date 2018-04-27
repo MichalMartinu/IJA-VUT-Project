@@ -34,19 +34,23 @@ public class Collector {
     public void setConnection(int output, int input, String as){
         if (output < blocks.size() && input < blocks.size())
         {
-            getBlock(input).setInput(output);
+            getBlock(output).setOutput(input);
+            if (getBlock(input).getInput() < output)
+            {
+                getBlock(input).setInput(output);
+            }
         }
         //TODO Errror
 
-        if (as == "a")
+        if (as == "a" && getBlock(input).getA() == -1)
         {
             getBlock(input).setA(0.0);
         }
-        else if (as == "b")
+        else if (as == "b" && getBlock(input).getB() == -1)
         {
             getBlock(input).setC(0.0);
         }
-        else if (as == "c")
+        else if (as == "c" && getBlock(input).getC() == -1)
         {
             getBlock(input).setC(0.0);
         }

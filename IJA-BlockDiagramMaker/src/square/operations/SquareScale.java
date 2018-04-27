@@ -11,7 +11,7 @@ public class SquareScale extends SquareObject{
 
     public SquareScale(double scaling) {
         this.scaling = scaling;
-        this.type = "Scaling";
+        this.type = "Scale";
     }
 
     public void execute() {

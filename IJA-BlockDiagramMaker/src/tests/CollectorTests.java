@@ -24,6 +24,12 @@ public class CollectorTests {
         blocksCollector.setBlock(block);
         block = new SquareHeight();
         blocksCollector.setBlock( block);
+        block = new SquareCircumference();
+        blocksCollector.setBlock( block);
+        block = new SquareScale(0);
+        blocksCollector.setBlock( block);
+        block = new SquareScale(0);
+        blocksCollector.setBlock( block);
 
 
         AbstractBlock ok;
@@ -33,9 +39,13 @@ public class CollectorTests {
 
         Assert.assertEquals((Double) (16.0), (Double) ok.getOutputResult());
 
-        blocksCollector.setConnection(2,0, "a");
+        blocksCollector.setConnection(1,2, "a");
+        blocksCollector.setConnection(2,3, "a");
+       // blocksCollector.setConnection(4,0, "a");
+        //blocksCollector.setConnection(3,1, "a");
+        //blocksCollector.setConnection(5,1, "a");
 
-        Assert.assertEquals(2,blocksCollector.getBlock(0).getInput());
+        //Assert.assertEquals(-1,blocksCollector.getBlock(1).getInput());
 
         DrawScheme hej = new DrawScheme();
         hej.drawScene(blocksCollector);
