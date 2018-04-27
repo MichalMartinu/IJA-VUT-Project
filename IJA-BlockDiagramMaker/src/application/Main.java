@@ -20,8 +20,8 @@ public class Main extends Application {
         primaryStage.setTitle("Block scheme maker");
 
         //Make scene full screen
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        Scene scene = new Scene(root,  screenBounds.getWidth(), screenBounds.getHeight());
+        //Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        Scene scene = new Scene(root,  1000, 700);
 
         primaryStage.setScene(scene);
         primaryStage.show();

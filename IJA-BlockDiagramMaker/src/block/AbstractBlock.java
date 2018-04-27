@@ -9,6 +9,7 @@ public abstract class AbstractBlock implements Block{
     protected double outputResult;
 
     protected int output;
+    protected String outputAs;
     protected int input;
 
     protected String state;
@@ -53,6 +54,14 @@ public abstract class AbstractBlock implements Block{
 
     public double getOutputResult() {
         return outputResult;
+    }
+
+    public String getOutputAs() {
+        return outputAs;
+    }
+
+    public void setOutputAs(String outputAs) {
+        this.outputAs = outputAs;
     }
 
     public int getOutput() {

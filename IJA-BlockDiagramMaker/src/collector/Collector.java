@@ -34,6 +34,7 @@ public class Collector {
     public void setConnection(int output, int input, String as){
         if (output < blocks.size() && input < blocks.size())
         {
+            getBlock(output).setOutputAs(as);
             getBlock(output).setOutput(input);
             if (getBlock(input).getInput() < output)
             {
@@ -55,6 +56,41 @@ public class Collector {
             getBlock(input).setC(0.0);
         }
         //TODO Error
+    }
+
+    public void next()
+    {
+        AbstractBlock tmpBlock;
+
+        for (AbstractBlock block: this.blocks) {
+            if (block.getState().equals("waiting"))
+            {
+                block.execute();
+            }
+            else if (block.getState().equals("calculated") && block.getOutput() != -1)
+            {
+                tmpBlock = this.blocks.get(block.getOutput());
+                if (block.getOutputAs().equals("a"))
+                {
+                    tmpBlock.setA(block.getOutputResult());
+                }
+                else if (block.getOutputAs().equals("b"))
+                {
+                    tmpBlock.setB(block.getOutputResult());
+                }
+                else if (block.getOutputAs().equals("c"))
+                {
+                    tmpBlock.setC(block.getOutputResult());
+                }
+
+                this.blocks.set(block.getOutput(), tmpBlock);
+                block.setState("done");
+            }
+            else if (block.getState().equals("calculated"))
+            {
+                block.setState("done");
+            }
+        }
     }
 
 }

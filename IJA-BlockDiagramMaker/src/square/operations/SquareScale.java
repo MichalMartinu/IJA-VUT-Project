@@ -15,8 +15,12 @@ public class SquareScale extends SquareObject{
     }
 
     public void execute() {
-        this.a =this.a * this.scaling;
-        this.a = Math.round(this.a * 1000000d)/1000000d;
-        this.state = "done";
+        if (this.a != -1 && this.a != 0)
+        {
+            this.a =this.a * this.scaling;
+            this.a = Math.round(this.a * 1000000d)/1000000d;
+            this.state = "calculated";
+        }
+
     }
 }
