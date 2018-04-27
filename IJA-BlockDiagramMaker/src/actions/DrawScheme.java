@@ -16,7 +16,7 @@ public class DrawScheme {
     public void drawScene(Collector collector){
         output.clear();
 
-        makeArrayList();
+        //makeArrayList();
         AbstractBlock block;
         initScene(collector.getCounter());
         int j = 0;
@@ -42,6 +42,20 @@ public class DrawScheme {
             }
 
             j += 6;
+        }
+
+        for (int i = 0; i<collector.getCounter(); i++)
+        {
+            block=collector.getBlock(i);
+
+            if (block.getOutput() != -1)
+            {
+                for (int g = 0; g < i*2+2; g+=2)
+                {
+                    this.output.set(i*6+2,replaceString(this.output.get(i*6+2),g+27,'-'));
+                    this.output.set(i*6+2,replaceString(this.output.get(i*6+2),g+28,'+'));
+                }
+            }
         }
 
 
@@ -168,8 +182,14 @@ public class DrawScheme {
         }
     }
 
-    public void makeArrayList()
-    {
-
+    public String replaceString(String str, int index, char replace){
+        if(str==null){
+            return str;
+        }else if(index<0 || index>=str.length()){
+            return str;
+        }
+        char[] chars = str.toCharArray();
+        chars[index] = replace;
+        return String.valueOf(chars);
     }
 }

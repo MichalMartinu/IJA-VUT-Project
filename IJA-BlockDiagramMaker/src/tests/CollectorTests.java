@@ -42,7 +42,7 @@ public class CollectorTests {
         blocksCollector.setConnection(1,2, "a");
         blocksCollector.setConnection(2,3, "a");
         blocksCollector.setConnection(4,0, "a");
-        blocksCollector.setConnection(3,1, "a");
+        blocksCollector.setConnection(3,0, "a");
         blocksCollector.setConnection(5,1, "a");
 
         //Assert.assertEquals(-1,blocksCollector.getBlock(1).getInput());
