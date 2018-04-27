@@ -8,9 +8,10 @@ import java.util.TreeMap;
 public class TriangleCircumference extends TriangleObject{
     private double result;
 
-    public TriangleCircumference(SortedMap<String, Double> triangle) {
-        super(triangle);
+    public TriangleCircumference() {
+        this.type = "Circumference";
     }
+
 
     public void execute()
     {

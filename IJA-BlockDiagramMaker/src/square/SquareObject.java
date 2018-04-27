@@ -10,6 +10,8 @@ public abstract class SquareObject extends AbstractBlock {
     public SquareObject() {
         this.a = -1.0;
         this.state = "waiting";
+        this.object = "Square";
+
     }
 
     public void check() throws Exception {

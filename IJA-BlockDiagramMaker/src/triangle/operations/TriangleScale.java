@@ -8,10 +8,10 @@ import java.util.TreeMap;
 public class TriangleScale extends TriangleObject{
     private double scaling;
 
-    public TriangleScale(SortedMap<String, Double> square, double scaling) {
-        super(square);
-        this.scaling = scaling;
+    public TriangleScale() {
+        this.type = "Scale";
     }
+
 
     public void execute() {
         this.a =this.a * this.scaling;

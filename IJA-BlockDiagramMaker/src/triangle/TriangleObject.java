@@ -5,16 +5,12 @@ import block.AbstractBlock;
 import java.util.SortedMap;
 
 public abstract class TriangleObject extends AbstractBlock{
-    protected double a;
-    protected double b;
-    protected double c;
-
-    public TriangleObject(SortedMap<String, Double> triangle)
-    {
-        a = triangle.get("a");
-        b = triangle.get("b");
-        c = triangle.get("c");
-        CheckIfTriangleIsValid();
+    public TriangleObject() {
+        this.a = -1.0;
+        this.b = -1.0;
+        this.c = -1.0;
+        this.state = "waiting";
+        this.object = "Triangle";
     }
 
     private void CheckIfTriangleIsValid()

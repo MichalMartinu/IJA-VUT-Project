@@ -14,6 +14,7 @@ public abstract class AbstractBlock implements Block{
 
     protected String state;
     protected String type;
+    protected String object;
 
     public AbstractBlock()
     {
@@ -83,6 +84,10 @@ public abstract class AbstractBlock implements Block{
     public String getState() {
 
         return state;
+    }
+
+    public String getObject() {
+        return object;
     }
 
     public void setState(String state) {

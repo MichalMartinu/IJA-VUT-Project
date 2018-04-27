@@ -8,8 +8,8 @@ import java.util.TreeMap;
 public class RectangleCircumference extends RectangleObject {
     private double result;
 
-    public RectangleCircumference(SortedMap<String, Double> rectangle) {
-        super(rectangle);
+    public RectangleCircumference() {
+        this.type = "Circumference";
     }
 
     public void execute()

@@ -9,8 +9,8 @@ public class RectangleArea extends RectangleObject {
 
     private double result;
 
-    public RectangleArea(SortedMap<String, Double> rectangle) {
-        super(rectangle);
+    public RectangleArea() {
+        this.type = "Area";
     }
 
     public void execute()

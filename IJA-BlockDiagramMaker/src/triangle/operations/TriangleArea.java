@@ -9,8 +9,8 @@ import java.util.TreeMap;
 public class TriangleArea extends TriangleObject{
     private double result;
 
-    public TriangleArea(SortedMap<String, Double> triangle) {
-        super(triangle);
+    public TriangleArea() {
+        this.type = "Area";
     }
 
     public void execute()

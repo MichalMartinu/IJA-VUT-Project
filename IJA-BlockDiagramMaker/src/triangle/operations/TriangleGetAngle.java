@@ -9,10 +9,10 @@ public class TriangleGetAngle extends TriangleObject {
     private double result;
     private String angle;
 
-    public TriangleGetAngle(SortedMap<String, Double> triangle, String angle) {
-        super(triangle);
-        this.angle = angle;
+    public TriangleGetAngle() {
+        this.type = "Diagonal";
     }
+
 
     public void execute()
     {

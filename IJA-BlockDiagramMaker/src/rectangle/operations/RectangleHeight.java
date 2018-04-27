@@ -9,8 +9,8 @@ public class RectangleHeight extends RectangleObject{
 
     private double result;
 
-    public RectangleHeight(SortedMap<String, Double> rectangle) {
-        super(rectangle);
+    public RectangleHeight() {
+        this.type = "Height";
     }
 
     public void execute()

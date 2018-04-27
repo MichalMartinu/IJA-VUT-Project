@@ -9,10 +9,10 @@ public class TriangleHeight extends TriangleObject {
     private double result;
     private String side;
 
-    public TriangleHeight(SortedMap<String, Double> triangle, String side) {
-        super(triangle);
-        this.side = side;
+    public TriangleHeight() {
+        this.type = "Height";
     }
+
 
     public void execute()
     {

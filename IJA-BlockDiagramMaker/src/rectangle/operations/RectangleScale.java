@@ -9,10 +9,10 @@ public class RectangleScale extends RectangleObject{
 
     private double scaling;
 
-    public RectangleScale(SortedMap<String, Double> rectangle, double scaling) {
-        super(rectangle);
-        this.scaling = scaling;
+    public RectangleScale() {
+        this.type = "Scale";
     }
+
 
     public void execute()
     {

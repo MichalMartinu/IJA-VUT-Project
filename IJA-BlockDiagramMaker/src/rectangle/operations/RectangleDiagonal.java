@@ -8,9 +8,10 @@ import java.util.TreeMap;
 public class RectangleDiagonal extends RectangleObject {
     private double result;
 
-    public RectangleDiagonal(SortedMap<String, Double> rectangle) {
-        super(rectangle);
+    public RectangleDiagonal() {
+        this.type = "Diagonal";
     }
+
 
     public void execute()
     {
