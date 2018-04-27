@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
@@ -9,18 +10,56 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Main">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <TextArea fx:id="textField" editable="false" prefHeight="372.0" prefWidth="476.0" style="-fx-focus-color: -fx-control-inner-background ; -fx-faint-focus-color: -fx-control-inner-background ;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+    <AnchorPane layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="734.0" AnchorPane.topAnchor="25.0">
+         <children>
+            <ChoiceBox fx:id="objectAdd" layoutX="76.0" layoutY="38.0" prefHeight="25.0" prefWidth="148.0" />
+            <Button fx:id="addBlockButton" layoutX="154.0" layoutY="104.0" mnemonicParsing="false" onAction="#addBlock" text="Add block" />
+            <Button layoutX="43.0" layoutY="444.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="162.0" text="Next Step" />
+            <Button layoutX="43.0" layoutY="500.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="162.0" text="Reset" />
+            <ChoiceBox fx:id="operationAdd" layoutX="76.0" layoutY="70.0" prefHeight="25.0" prefWidth="148.0" />
+            <Text layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Object" />
+            <Text layoutX="14.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operation" />
+            <Line endX="250.0" layoutY="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Line endX="250.0" layoutX="10.0" layoutY="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
+            <Button layoutX="159.0" layoutY="198.0" mnemonicParsing="false" text="Connect" />
+            <TextField layoutX="23.0" layoutY="165.0" prefHeight="25.0" prefWidth="35.0" />
+            <TextField layoutX="93.0" layoutY="165.0" prefHeight="25.0" prefWidth="35.0" />
+            <TextField layoutX="163.0" layoutY="165.0" prefHeight="25.0" prefWidth="35.0" />
+            <Text layoutX="70.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
+            <Text layoutX="144.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="as" />
+            <Text layoutX="212.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="side" />
+            <Line endX="250.0" layoutX="20.0" layoutY="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutX="159.0" layoutY="298.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Delete" />
+            <TextField layoutX="168.0" layoutY="262.0" prefHeight="25.0" prefWidth="42.0" />
+            <Text layoutX="19.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Index of block to delete" />
+            <Line endX="250.0" layoutX="30.0" layoutY="420.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Text layoutX="20.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add data to block" wrappingWidth="100.67578125" />
+            <TextField layoutX="124.0" layoutY="383.0" prefHeight="25.0" prefWidth="35.0" />
+            <Text layoutX="25.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a" />
+            <TextField layoutX="41.0" layoutY="347.0" prefHeight="25.0" prefWidth="35.0" />
+            <TextField layoutX="103.0" layoutY="347.0" prefHeight="25.0" prefWidth="35.0" />
+            <TextField layoutX="163.0" layoutY="347.0" prefHeight="25.0" prefWidth="35.0" />
+            <Text layoutX="90.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="b" />
+            <Text layoutX="150.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="c" />
+            <Button layoutX="168.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Delete" />
+         </children>
+      </AnchorPane>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="980.0" style="-fx-background-color: #6d6f71; -fx-text-fill: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -30,24 +69,5 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.18813905930470348" layoutY="25.0" prefHeight="466.0" prefWidth="980.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ChoiceBox layoutX="16.0" layoutY="36.0" prefWidth="150.0" />
-                  <Button layoutX="56.0" layoutY="75.0" mnemonicParsing="false" text="Add block" />
-                  <Button layoutX="56.0" layoutY="123.0" mnemonicParsing="false" text="Next Step" />
-                  <Button layoutX="56.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Start" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <TextArea layoutX="7.0" layoutY="14.0" prefHeight="424.0" prefWidth="764.0" text="  |-----------------------|      &#10;  |         Square        |      &#10;|-|IN|     Diagonal   |OUT|  &#10;| |-----------------------|   | |&#10;|---------------------------+-+-+                            | |&#10;                              | |&#10;  |-----------------------|   | |&#10;  |           Square           |   | |&#10;  |IN|       Area       |OUT|   | |&#10;  |-----------------------|     |&#10;                                |&#10;                                |&#10;  |-----------------------|   |&#10;  |         Square        |   |&#10;  |IN|      Height    |OUT|   |&#10;  |-----------------------|    ">
-                     <font>
-                        <Font name="Courier New" size="12.0" />
-                     </font></TextArea>
-               </children></AnchorPane>
-        </items>
-      </SplitPane>
    </children>
 </AnchorPane>

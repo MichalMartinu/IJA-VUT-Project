@@ -59,9 +59,9 @@ public class DrawScheme {
         }
 
 
-        for (int i = 0; i <  this.output.size(); i++) {
+        /*for (int i = 0; i <  this.output.size(); i++) {
             System.out.println( this.output.get(i));
-        }
+        }*/
     }
 
     public void drawConnectionLineIn(AbstractBlock block, int index){
@@ -191,5 +191,9 @@ public class DrawScheme {
         char[] chars = str.toCharArray();
         chars[index] = replace;
         return String.valueOf(chars);
+    }
+
+    public ArrayList<String> getOutput() {
+        return output;
     }
 }
