@@ -3,7 +3,7 @@ package actions;
 import block.AbstractBlock;
 import square.operations.*;
 
-public class BlockTypes {
+public class BlockOperations {
 
     public static AbstractBlock getType(String object, String operation)
     {
@@ -26,4 +26,6 @@ public class BlockTypes {
         }
         return null;
     }
+
+
 }

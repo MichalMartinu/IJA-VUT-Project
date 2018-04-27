@@ -112,13 +112,13 @@ public class DrawScheme {
 
         type="full";
         if (direction.equals("higher")) {
-            for (int i = blockIndex+1; i < block.getOutput(); i++)
+            for (int i = blockIndex+1; i < output; i++)
             {
                 block = collector.getBlock(i);
                 addToIndex(Lines.leftLine(block, type, blockIndex), i*6);
             }
         } else {
-            for (int i = block.getOutput()+1; i < blockIndex; i++)
+            for (int i = output+1; i < blockIndex; i++)
             {
                 block = collector.getBlock(i);
                 addToIndex(Lines.leftLine(block, type, blockIndex), i*6);

@@ -1,22 +1,17 @@
 package application;
 
-import actions.BlockTypes;
+import actions.BlockOperations;
 import actions.DrawScheme;
 import block.AbstractBlock;
 import collector.Collector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollBar;
-import square.operations.*;
-
-import java.awt.*;
+import javafx.scene.control.TextField;
 
 public class MainController {
     private Collector collector;
@@ -24,6 +19,7 @@ public class MainController {
 
     private ObservableList objectList = FXCollections.observableArrayList();
     private ObservableList operationsList = FXCollections.observableArrayList();
+    private ObservableList asList = FXCollections.observableArrayList();
 
 
     public void initialize()
@@ -32,6 +28,7 @@ public class MainController {
         scheme = new DrawScheme();
         loadObjects();
         loadOperations();
+        loadSides();
     }
 
     @FXML
@@ -43,7 +40,17 @@ public class MainController {
     @FXML
     private ChoiceBox<String> operationAdd;
 
+    @FXML
+    private ChoiceBox<String> asPort;
 
+    @FXML
+    private TextField inputPort;
+
+    @FXML
+    private TextField outputPort;
+
+    /*@FXML
+    private TextField asPort;*/
 
     public void addBlock(ActionEvent event)
     {
@@ -58,18 +65,46 @@ public class MainController {
 
         AbstractBlock block;
 
-        block = BlockTypes.getType(object,operation);
+        block = BlockOperations.getType(object,operation);
         this.collector.setBlock(block);
 
         this.scheme.drawScene(this.collector);
 
 
-        String listString = "";
-        for (String s : scheme.getOutput())
+        drawLabel();
+    }
+
+    public void connectBlock(ActionEvent event)
+    {
+        if (!(inputPort.getText().matches("[0-9]+") && outputPort.getText().matches("[0-9]+")))
         {
-            listString += s + "\n";
+            alertAdd("Wrong ports", "Fill all ports by numbers!");
+            return;
         }
-        textField.setText(listString);
+
+        if (asPort.getValue() == null)
+        {
+            alertAdd("Missing side", "Please specify side!");
+            return;
+        }
+
+
+        int input = Integer.parseInt(inputPort.getText());
+        int output = Integer.parseInt(outputPort.getText());
+        String as = asPort.getValue();
+
+        collector.setConnection(input,output,as);
+        this.scheme.drawScene(this.collector);
+        drawLabel();
+
+        //this.collector.setConnection();
+    }
+
+    public void resetScheme(ActionEvent event)
+    {
+        collector = new Collector();
+        this.scheme.drawScene(this.collector);
+        drawLabel();
     }
 
     private void loadObjects()
@@ -94,6 +129,16 @@ public class MainController {
         operationAdd.getItems().addAll(operationsList);
     }
 
+    private void loadSides()
+    {
+        asList.removeAll(asList);
+        String a = "a";
+        String b = "b";
+        String c = "c";
+        asList.addAll(a,b,c);
+        asPort.getItems().addAll(asList);
+    }
+
     private void alertAdd(String title, String header)
     {
         Alert a =  new Alert(Alert.AlertType.ERROR);
@@ -101,5 +146,16 @@ public class MainController {
         a.setHeaderText(header);
         a.setTitle(title);
         a.showAndWait();
+    }
+
+
+    private void drawLabel()
+    {
+        String listString = "";
+        for (String s : scheme.getOutput())
+        {
+            listString += s + "\n";
+        }
+        textField.setText(listString);
     }
 }
