@@ -7,11 +7,13 @@ import collector.Collector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class MainController {
     private Collector collector;
@@ -20,6 +22,7 @@ public class MainController {
     private ObservableList<String> objectList = FXCollections.observableArrayList();
     private ObservableList<String> operationsList = FXCollections.observableArrayList();
     private ObservableList<String> asList = FXCollections.observableArrayList();
+    //public static final ObservableList data = FXCollections.observableArrayList();
 
 
     public void initialize()
@@ -29,6 +32,7 @@ public class MainController {
         loadObjects();
         loadOperations();
         loadSides();
+        //dataBlock = new ListView();
     }
 
     @FXML
@@ -49,8 +53,9 @@ public class MainController {
     @FXML
     private TextField outputPort;
 
-    /*@FXML
-    private TextField asPort;*/
+    @FXML
+    private Label dataBlock;
+
 
     public void addBlock(ActionEvent event)
     {
@@ -72,6 +77,7 @@ public class MainController {
 
 
         drawLabel();
+        addData();
     }
 
     public void connectBlock(ActionEvent event)
@@ -96,6 +102,8 @@ public class MainController {
         collector.setConnection(input,output,as);
         this.scheme.drawScene(this.collector);
         drawLabel();
+
+
 
         //this.collector.setConnection();
     }
@@ -148,6 +156,35 @@ public class MainController {
         a.showAndWait();
     }
 
+    private void addData()
+    {
+        //dataBlock.getChildren().clear();
+        AbstractBlock block;
+        String blockId;
+        String outputValue ;
+        String State;
+
+
+
+        String outputText = "";
+
+        for (int i = 0; i <  this.collector.getCounter(); i++) {
+            //System.out.println( this.collector.getBlock(i));
+             block = collector.getBlock(i);
+             outputValue = Integer.toString(block.getOutput());
+             if (outputValue.equals("-1"))
+             {
+                 outputValue = "waiting for output";
+             }
+
+             blockId = Integer.toString(i+1);
+             outputText += "   Block number: " + blockId + "\n";
+             outputText += "   Input data\n";
+             outputText += "       a: " + block.getA() + "\n"; //TODO na to udelat uni funkci
+             outputText += "   Reuslt: " + outputValue + "\n\n";
+         }
+        dataBlock.setText(outputText);
+    }
 
     private void drawLabel()
     {

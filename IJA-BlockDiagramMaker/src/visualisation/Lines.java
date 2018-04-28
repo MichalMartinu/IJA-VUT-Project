@@ -109,12 +109,9 @@ public class Lines {
             output.add("  ");
             output.add("  ");
 
-            if(block.getOutput() < i)
+            /*if(block.getOutput() < i && block.getInput() != -1)
             {
-                if (block.getInput() != -1)
-                {
-                    output.set(j+4, "");
-                }
+                output.set(j+4, "");
             }
             else
             {
@@ -122,7 +119,7 @@ public class Lines {
                 {
                     output.set(j+4, "");
                 }
-            }
+            }*/
 
 
 
