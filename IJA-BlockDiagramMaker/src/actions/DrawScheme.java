@@ -10,7 +10,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class DrawScheme {
-    ArrayList<String> output = new ArrayList<String>();
+    private ArrayList<String> output = new ArrayList<String>();
 
 
     public void drawScene(Collector collector){

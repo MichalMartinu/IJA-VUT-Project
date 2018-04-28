@@ -23,6 +23,21 @@ public abstract class AbstractBlock implements Block{
         a = -1;
         b = -1;
         c = -1;
+        state = "waiting";
+
+    }
+
+    public void defaultBlock()
+    {
+        outputResult = 0;
+        if(input != -1)
+        {
+            a = -1;
+            b = -1;
+            c = -1;
+        }
+        state = "waiting";
+
     }
 
     public abstract void execute();

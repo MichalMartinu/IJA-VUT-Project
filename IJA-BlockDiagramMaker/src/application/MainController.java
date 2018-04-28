@@ -56,6 +56,18 @@ public class MainController {
     @FXML
     private Label dataBlock;
 
+    @FXML
+    private TextField sideA;
+
+    @FXML
+    private TextField sideB;
+
+    @FXML
+    private TextField sideC;
+
+    @FXML
+    private TextField sideBlock;
+
 
     public void addBlock(ActionEvent event)
     {
@@ -77,7 +89,6 @@ public class MainController {
 
 
         drawLabel();
-        addData();
     }
 
     public void connectBlock(ActionEvent event)
@@ -108,10 +119,37 @@ public class MainController {
         //this.collector.setConnection();
     }
 
+    public void addSide(ActionEvent event)
+    {
+        //String a = sideA.getText();
+        double a = Double.parseDouble(sideA.getText());
+        //double b = Double.parseDouble(sideB.getText());
+        //double c = Double.parseDouble(sideC.getText());
+        int blockNum = Integer.parseInt(sideBlock.getText());
+        //System.out.println(a);
+        //System.out.println(blockNum);
+        //this.collector.s(blockNum).setA(a);
+        this.collector.changeBlockValue(blockNum, "a", a);
+        drawLabel();
+    }
+
     public void resetScheme(ActionEvent event)
     {
         collector = new Collector();
         this.scheme.drawScene(this.collector);
+        drawLabel();
+    }
+
+    public void resetBlocks(ActionEvent event)
+    {
+        collector.reset();
+        this.scheme.drawScene(this.collector);
+        drawLabel();
+    }
+
+    public void nextStep(ActionEvent event)
+    {
+        this.collector.next();
         drawLabel();
     }
 
@@ -171,7 +209,7 @@ public class MainController {
         for (int i = 0; i <  this.collector.getCounter(); i++) {
             //System.out.println( this.collector.getBlock(i));
              block = collector.getBlock(i);
-             outputValue = Integer.toString(block.getOutput());
+             outputValue = Double.toString(block.getOutputResult());
              if (outputValue.equals("-1"))
              {
                  outputValue = "waiting for output";
@@ -194,5 +232,7 @@ public class MainController {
             listString += s + "\n";
         }
         textField.setText(listString);
+
+        addData();
     }
 }
