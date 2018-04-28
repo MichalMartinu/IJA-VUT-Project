@@ -17,9 +17,9 @@ public class MainController {
     private Collector collector;
     private DrawScheme scheme;
 
-    private ObservableList objectList = FXCollections.observableArrayList();
-    private ObservableList operationsList = FXCollections.observableArrayList();
-    private ObservableList asList = FXCollections.observableArrayList();
+    private ObservableList<String> objectList = FXCollections.observableArrayList();
+    private ObservableList<String> operationsList = FXCollections.observableArrayList();
+    private ObservableList<String> asList = FXCollections.observableArrayList();
 
 
     public void initialize()
@@ -109,7 +109,7 @@ public class MainController {
 
     private void loadObjects()
     {
-        objectList.removeAll(objectList);
+        objectList.removeAll();
         String a = "Square";
         String b = "Rectangle";
         String c = "Triangle";
@@ -119,7 +119,7 @@ public class MainController {
 
     private void loadOperations()
     {
-        operationsList.removeAll(operationsList);
+        operationsList.removeAll();
         String a = "Area";
         String b = "Circumference";
         String c = "Diagonal";
@@ -131,7 +131,7 @@ public class MainController {
 
     private void loadSides()
     {
-        asList.removeAll(asList);
+        asList.removeAll();
         String a = "a";
         String b = "b";
         String c = "c";

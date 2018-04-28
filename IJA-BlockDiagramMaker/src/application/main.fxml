@@ -16,7 +16,7 @@
          <children>
             <TextArea fx:id="textField" editable="false" prefHeight="372.0" prefWidth="476.0" style="-fx-focus-color: -fx-control-inner-background; -fx-faint-focus-color: -fx-control-inner-background; -fx-border-color: #6d6f71;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
-                  <Font name="Courier New" size="12.0" />
+                  <Font name="Lucida Console" size="12.0" />
                </font>
             </TextArea>
          </children>
