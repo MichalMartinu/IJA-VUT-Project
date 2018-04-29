@@ -125,7 +125,6 @@ public class Collector{
         }
     }
 
-
     public void save(File fileName) throws IOException {
         FileOutputStream fos = new FileOutputStream(fileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);

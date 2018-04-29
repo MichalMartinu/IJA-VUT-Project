@@ -37,12 +37,19 @@ public abstract class AbstractBlock implements Block, Serializable{
         outputResult = 0;
         if(Collections.max(inputArray) != -1)
         {
-            a = -1;
-            b = -1;
-            c = -1;
+            a = 0;
+            b = 0;
+            c = 0;
         }
         state = "waiting";
 
+    }
+
+    public void removeBlock()
+    {
+        a = -1;
+        b = -1;
+        c = -1;
     }
 
     public void addInput(Integer input)

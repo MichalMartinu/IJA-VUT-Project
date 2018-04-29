@@ -116,6 +116,30 @@ public class MainController {
         int output = Integer.parseInt(outputPort.getText())-1;
         String as = asPort.getValue();
 
+        //Cycle detection
+
+        if(collector.getBlock(output).getOutput() == input)
+        {
+            alertAdd("Cycle", "Cycle detected between block "+(input+1)+" and "+(output+1));
+            return;
+        }
+
+        int flag = 0;
+        for (int i = 0; i<collector.getCounter(); i++)
+        {
+            if(collector.getBlock(i).getOutput() == -1)
+            {
+                flag += 1;
+            }
+        }
+
+        if(flag <= 1)
+        {
+            alertAdd("Cycle", "Cycle detected between whole scheme!");
+            return;
+        }
+
+
         collector.setConnection(input,output,as);
         this.scheme.drawScene(this.collector);
         drawLabel();
@@ -141,6 +165,8 @@ public class MainController {
 
     public void removeBlock(ActionEvent event){
         int index = Integer.parseInt(blockToRemove.getText())-1;
+        int blockIndex = collector.getBlock(index).getOutput();
+        collector.getBlock(blockIndex).removeBlock();
         collector.delete(index);
         this.scheme.drawScene(this.collector);
         drawLabel();
