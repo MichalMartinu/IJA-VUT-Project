@@ -12,7 +12,7 @@ public class Blocks {
         String type = block.getType();
         ArrayList<String> output = new ArrayList<String>();
 
-        if (mObject == "Square")
+        if (mObject.equals("Square"))
         {
             switch (type)
             {
@@ -50,7 +50,7 @@ public class Blocks {
 
             }
         }
-        if (mObject == "Rectangle")
+        if (mObject.equals("Rectangle"))
         {
             switch (type)
             {
@@ -88,7 +88,7 @@ public class Blocks {
 
             }
         }
-        if (mObject == "Triangle")
+        if (mObject.equals("Triangle"))
         {
             switch (type)
             {

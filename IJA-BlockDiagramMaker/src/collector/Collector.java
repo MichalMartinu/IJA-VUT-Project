@@ -1,11 +1,12 @@
 package collector;
 
+import actions.DrawScheme;
 import block.AbstractBlock;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class Collector {
+public class Collector{
     private ArrayList<AbstractBlock> blocks = new ArrayList<AbstractBlock>();
     //private ArrayList<AbstractBlock> backup = new ArrayList<AbstractBlock>();
     private int counter;
@@ -16,24 +17,59 @@ public class Collector {
         this.flagFirst = 0;
     }
 
-
     public void setBlock(AbstractBlock block) {
         this.blocks.add(block);
-        this.counter += 1;
     }
 
     public AbstractBlock getBlock(int key) {
         return this.blocks.get(key);
     }
 
-    public void changeBlockValue(int key, String type, Double value) {
+    public void changeBlockValue(int key, String type, Double value){
         if (type.equals("a")) {
             this.blocks.get(key).setA(value);
         }
     }
 
     public int getCounter() {
-        return counter;
+        return blocks.size();
+    }
+
+    public void delete(int index){
+        AbstractBlock block;
+        block = blocks.get(index);
+
+        if(block.getOutput() != -1)
+        {
+            blocks.get(block.getOutput()).removeInput(index);
+            String side = block.getOutputAs();
+            switch (side)
+            {
+                case "a":
+                    blocks.get(block.getOutput()).setA(-1);
+                    break;
+                case "b":
+                    blocks.get(block.getOutput()).setB(-1);
+                    break;
+                case "c":
+                    blocks.get(block.getOutput()).setC(-1);
+                    break;
+            }
+        }
+
+        if(block.getMaxInput() != -1)
+        {
+            ArrayList<Integer> input = block.getInputArray();
+
+            for (int i = 0; i < input.size(); i++)
+            {
+                blocks.get(i).setOutput(-1);
+            }
+        }
+
+
+        this.blocks.remove(index);
+
     }
 
     public void reset()
@@ -48,9 +84,10 @@ public class Collector {
         if (output < blocks.size() && input < blocks.size()) {
             getBlock(output).setOutputAs(as);
             getBlock(output).setOutput(input);
-            if (getBlock(input).getInput() < output) {
+            getBlock(input).addInput(output);
+            /*if (getBlock(input).getMaxInput() < output) {
                 getBlock(input).setInput(output);
-            }
+            }*/
         }
         //TODO Errror
 
@@ -64,7 +101,7 @@ public class Collector {
         //TODO Error
     }
 
-    public void next() {
+    public void next(){
         AbstractBlock tmpBlock;
 
         for (AbstractBlock block : this.blocks) {
@@ -86,6 +123,23 @@ public class Collector {
                 block.setState("done");
             }
         }
+    }
+
+
+    public void save(File fileName) throws IOException {
+        FileOutputStream fos = new FileOutputStream(fileName);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(blocks);
+        oos.close();
+    }
+
+    public void read(File fileName) throws IOException, ClassNotFoundException {
+        ArrayList<AbstractBlock> save = new ArrayList<AbstractBlock>();
+        FileInputStream fis = new FileInputStream(fileName);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        save = (ArrayList<AbstractBlock>) ois.readObject();
+        ois.close();
+        this.blocks = save;
     }
 
 }

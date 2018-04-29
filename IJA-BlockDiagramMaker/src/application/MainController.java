@@ -14,6 +14,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+
+import java.io.*;
 
 public class MainController {
     private Collector collector;
@@ -68,6 +71,9 @@ public class MainController {
     @FXML
     private TextField sideBlock;
 
+    @FXML
+    private TextField blockToRemove;
+
 
     public void addBlock(ActionEvent event)
     {
@@ -119,8 +125,7 @@ public class MainController {
         //this.collector.setConnection();
     }
 
-    public void addSide(ActionEvent event)
-    {
+    public void addSide(ActionEvent event) {
         //String a = sideA.getText();
         double a = Double.parseDouble(sideA.getText());
         //double b = Double.parseDouble(sideB.getText());
@@ -140,6 +145,13 @@ public class MainController {
         drawLabel();
     }
 
+    public void removeBlock(ActionEvent event){
+        int index = Integer.parseInt(blockToRemove.getText());
+        collector.delete(index);
+        this.scheme.drawScene(this.collector);
+        drawLabel();
+    }
+
     public void resetBlocks(ActionEvent event)
     {
         collector.reset();
@@ -147,10 +159,41 @@ public class MainController {
         drawLabel();
     }
 
-    public void nextStep(ActionEvent event)
-    {
+    public void nextStep(ActionEvent event){
         this.collector.next();
+        this.scheme.drawScene(this.collector);
         drawLabel();
+    }
+
+    public void saveFile(ActionEvent event) throws IOException {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
+        File selectedFile = fc.showSaveDialog(null);
+
+        if(selectedFile != null) {
+            this.collector.save(selectedFile);
+            this.scheme = new DrawScheme();
+            this.scheme.drawScene(this.collector);
+            drawLabel();
+        }
+    }
+
+    public void openFile(ActionEvent event) throws IOException, ClassNotFoundException {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
+        File selectedFile = fc.showOpenDialog(null);
+
+        if(selectedFile != null)
+        {
+            this.collector = new Collector();
+            this.collector.read(selectedFile);
+            this.scheme = new DrawScheme();
+            this.scheme.drawScene(this.collector);
+
+            drawLabel();
+        }
+
+
     }
 
     private void loadObjects()
@@ -224,6 +267,7 @@ public class MainController {
         dataBlock.setText(outputText);
     }
 
+
     private void drawLabel()
     {
         String listString = "";
@@ -235,4 +279,8 @@ public class MainController {
 
         addData();
     }
+
+    
+
+
 }

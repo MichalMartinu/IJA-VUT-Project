@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Lines {
     public static ArrayList<String> inputLine(AbstractBlock block)
     {
-        int input = block.getInput();
+        int input = block.getMaxInput();
         ArrayList<String> output = new ArrayList<String>();
         if (input != -1){
             output.add("  ");
@@ -33,7 +33,7 @@ public class Lines {
 
     public static ArrayList<String> leftLine(AbstractBlock block, String type, int outputIndex)
     {
-        int inputPort = block.getInput();
+        int inputPort = block.getMaxInput();
         ArrayList<String> output = new ArrayList<String>();
         switch(type)
         {
@@ -109,13 +109,13 @@ public class Lines {
             output.add("  ");
             output.add("  ");
 
-            /*if(block.getOutput() < i && block.getInput() != -1)
+            /*if(block.getOutput() < i && block.getMaxInput() != -1)
             {
                 output.set(j+4, "");
             }
             else
             {
-                if (block.getInput() != -1)
+                if (block.getMaxInput() != -1)
                 {
                     output.set(j+4, "");
                 }

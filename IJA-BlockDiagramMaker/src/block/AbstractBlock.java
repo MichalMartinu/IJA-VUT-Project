@@ -2,7 +2,11 @@ package block;
 
 import blockInterface.Block;
 
-public abstract class AbstractBlock implements Block{
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public abstract class AbstractBlock implements Block, Serializable{
     protected double a;
     protected double b;
     protected double c;
@@ -10,7 +14,8 @@ public abstract class AbstractBlock implements Block{
 
     protected int output;
     protected String outputAs;
-    protected int input;
+    private ArrayList<Integer> inputArray = new ArrayList<Integer>();
+
 
     protected String state;
     protected String type;
@@ -19,7 +24,7 @@ public abstract class AbstractBlock implements Block{
     public AbstractBlock()
     {
         output = -1;
-        input = -1;
+        inputArray.add(-1);
         a = -1;
         b = -1;
         c = -1;
@@ -30,7 +35,7 @@ public abstract class AbstractBlock implements Block{
     public void defaultBlock()
     {
         outputResult = 0;
-        if(input != -1)
+        if(Collections.max(inputArray) != -1)
         {
             a = -1;
             b = -1;
@@ -38,6 +43,11 @@ public abstract class AbstractBlock implements Block{
         }
         state = "waiting";
 
+    }
+
+    public void addInput(Integer input)
+    {
+        inputArray.add(input);
     }
 
     public abstract void execute();
@@ -88,12 +98,19 @@ public abstract class AbstractBlock implements Block{
         this.output = output;
     }
 
-    public int getInput() {
-        return input;
+    public int getMaxInput() {
+        return Collections.max(inputArray);
+
     }
 
-    public void setInput(int input) {
-        this.input = input;
+    public void removeInput(int input) {
+        for (int i =0; i < inputArray.size(); i++)
+        {
+            if(inputArray.get(i) == input)
+            {
+                inputArray.remove(i);
+            }
+        }
     }
 
     public String getState() {
@@ -113,4 +130,7 @@ public abstract class AbstractBlock implements Block{
         return type;
     }
 
+    public ArrayList<Integer> getInputArray() {
+        return inputArray;
+    }
 }

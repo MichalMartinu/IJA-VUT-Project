@@ -16,6 +16,11 @@ public class DrawScheme {
     public void drawScene(Collector collector){
         output.clear();
 
+        if(collector.getCounter() == 0)
+        {
+            return;
+        }
+
         //makeArrayList();
         AbstractBlock block;
         initScene(collector.getCounter());
@@ -59,9 +64,9 @@ public class DrawScheme {
         }
 
 
-        /*for (int i = 0; i <  this.output.size(); i++) {
+        for (int i = 0; i <  this.output.size(); i++) {
             System.out.println( this.output.get(i));
-        }*/
+        }
     }
 
     public void drawConnectionLineIn(AbstractBlock block, int index){
