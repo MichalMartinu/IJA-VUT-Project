@@ -91,6 +91,11 @@ public class Lines {
             output.set(4, "");
         }
 
+        if (block.getOutput() == -1)
+        {
+            //output.set(5, "");
+        }
+
         return output;
     }
 
@@ -108,6 +113,8 @@ public class Lines {
             output.add("  ");
             output.add("  ");
             output.add("  ");
+
+
 
             /*if(block.getOutput() < i && block.getMaxInput() != -1)
             {

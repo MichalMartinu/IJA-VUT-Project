@@ -112,8 +112,8 @@ public class MainController {
         }
 
 
-        int input = Integer.parseInt(inputPort.getText());
-        int output = Integer.parseInt(outputPort.getText());
+        int input = Integer.parseInt(inputPort.getText())-1;
+        int output = Integer.parseInt(outputPort.getText())-1;
         String as = asPort.getValue();
 
         collector.setConnection(input,output,as);
@@ -126,14 +126,8 @@ public class MainController {
     }
 
     public void addSide(ActionEvent event) {
-        //String a = sideA.getText();
         double a = Double.parseDouble(sideA.getText());
-        //double b = Double.parseDouble(sideB.getText());
-        //double c = Double.parseDouble(sideC.getText());
-        int blockNum = Integer.parseInt(sideBlock.getText());
-        //System.out.println(a);
-        //System.out.println(blockNum);
-        //this.collector.s(blockNum).setA(a);
+        int blockNum = Integer.parseInt(sideBlock.getText())-1;
         this.collector.changeBlockValue(blockNum, "a", a);
         drawLabel();
     }
@@ -146,7 +140,7 @@ public class MainController {
     }
 
     public void removeBlock(ActionEvent event){
-        int index = Integer.parseInt(blockToRemove.getText());
+        int index = Integer.parseInt(blockToRemove.getText())-1;
         collector.delete(index);
         this.scheme.drawScene(this.collector);
         drawLabel();
@@ -270,7 +264,7 @@ public class MainController {
 
     private void drawLabel()
     {
-        String listString = "";
+        String listString = "\n";
         for (String s : scheme.getOutput())
         {
             listString += s + "\n";
@@ -279,8 +273,6 @@ public class MainController {
 
         addData();
     }
-
-    
 
 
 }

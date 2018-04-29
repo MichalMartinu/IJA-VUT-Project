@@ -3,6 +3,7 @@ package actions;
 import block.AbstractBlock;
 import collector.Collector;
 import visualisation.Blocks;
+import visualisation.Informations;
 import visualisation.Lines;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class DrawScheme {
             block=collector.getBlock(i);
             drawConnectionLineIn(block, j);
             drawBlock(block, j);
+            drawInformation(block, j, i);
 
             j += 6;
         }
@@ -57,16 +59,21 @@ public class DrawScheme {
             {
                 for (int g = 0; g < i*2+2; g+=2)
                 {
-                    this.output.set(i*6+2,replaceString(this.output.get(i*6+2),g+27,'-'));
-                    this.output.set(i*6+2,replaceString(this.output.get(i*6+2),g+28,'+'));
+                    this.output.set(i*6+2,replaceString(this.output.get(i*6+2),g+34,'-'));
+                    this.output.set(i*6+2,replaceString(this.output.get(i*6+2),g+35,'+'));
                 }
             }
         }
 
 
-        for (int i = 0; i <  this.output.size(); i++) {
+        /*for (int i = 0; i <  this.output.size(); i++) {
             System.out.println( this.output.get(i));
-        }
+        }*/
+    }
+
+    private void drawInformation(AbstractBlock block, int index, int blockIndex)
+    {
+        addBeforeIndex(Informations.data(block, blockIndex), index);
     }
 
     public void drawConnectionLineIn(AbstractBlock block, int index){
@@ -177,6 +184,15 @@ public class DrawScheme {
         for (int i = index; i<index+item.size(); i++)
         {
             this.output.set(i, this.output.get(i) + item.get(j++));
+        }
+    }
+
+    public void addBeforeIndex(ArrayList<String > item, int index)
+    {
+        int j = 0;
+        for (int i = index; i<index+item.size(); i++)
+        {
+            this.output.set(i, item.get(j++) + this.output.get(i));
         }
     }
 
