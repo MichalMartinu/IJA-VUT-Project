@@ -5,7 +5,7 @@ import block.AbstractBlock;
 import java.util.SortedMap;
 
 public abstract class TriangleObject extends AbstractBlock{
-    public TriangleObject() {
+    protected TriangleObject() {
         this.a = -1.0;
         this.b = -1.0;
         this.c = -1.0;
@@ -22,6 +22,6 @@ public abstract class TriangleObject extends AbstractBlock{
     }
 
     public abstract void execute();
-    
+
 
 }

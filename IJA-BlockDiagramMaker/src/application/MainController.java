@@ -236,6 +236,42 @@ public class MainController {
     }
 
     public void nextStep(ActionEvent event){
+        AbstractBlock block;
+        int flag = 0;
+
+        for (int i = 0; i<collector.getCounter(); i++)
+        {
+            block = collector.getBlock(i);
+
+            switch (block.getObject())
+            {
+                case "Square":
+                    if(block.getA() == -1)
+                    {
+                        flag = 1;
+                    }
+                    break;
+                case "Rectangle":
+                    if(block.getA() == -1 || block.getB() == -1)
+                    {
+                        flag = 1;
+                    }
+                    break;
+                case "Triangle":
+                    if(block.getA() == -1 || block.getB() == -1 || block.getC() == -1)
+                    {
+                        flag = 1;
+                    }
+                    break;
+            }
+
+            if(flag == 1)
+            {
+                alertAdd("Missing values", "Please add all missing value where side is -1 into blocks!");
+                return;
+            }
+        }
+
         this.collector.next();
         this.scheme.drawScene(this.collector);
         drawLabel();
@@ -287,8 +323,8 @@ public class MainController {
         operationsList.removeAll();
         String a = "Area";
         String b = "Circumference";
-        String c = "Div";
-        String d = "Height";
+        String c = "Height";
+        String d = "Div";
         String e = "Sum";
         operationsList.addAll(a,b,c,d,e);
         operationAdd.getItems().addAll(operationsList);

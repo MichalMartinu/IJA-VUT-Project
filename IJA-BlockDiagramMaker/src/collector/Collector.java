@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Collector{
-    private ArrayList<AbstractBlock> blocks = new ArrayList<AbstractBlock>();
+    private ArrayList<AbstractBlock> blocks = new ArrayList<>();
     //private ArrayList<AbstractBlock> backup = new ArrayList<AbstractBlock>();
     private int counter;
     private int flagFirst;
@@ -114,6 +114,7 @@ public class Collector{
         AbstractBlock tmpBlock;
 
         for (AbstractBlock block : this.blocks) {
+
             if (block.getState().equals("waiting")) {
                 block.execute();
             }
