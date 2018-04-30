@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
+import java.awt.event.MouseEvent;
 import java.io.*;
 
 public class MainController {
@@ -79,6 +80,9 @@ public class MainController {
 
     @FXML
     private ChoiceBox<String> sideToRemove;
+
+    @FXML
+    private Label mouseTextLab;
 
 
 
@@ -367,6 +371,36 @@ public class MainController {
         drawLabel();
     }
 
+    public void mosueDeleteValue()
+    {
+        mouseTextLab.setText("   Value of connection is: ");
+    }
+
+    public void mouseShowValue()
+    {
+        setMouseText(0);
+    }
+
+    public void mouseShowValue2()
+    {
+        setMouseText(1);
+    }
+
+    public void mouseShowValue3()
+    {
+        setMouseText(2);
+    }
+
+    public void mouseShowValue4()
+    {
+        setMouseText(3);
+    }
+
+    public void mouseShowValue5()
+    {
+        setMouseText(4);
+    }
+
     private void loadObjects()
     {
         objectList.removeAll();
@@ -460,6 +494,15 @@ public class MainController {
         textField.setText(listString);
 
         addData();
+    }
+
+    private void setMouseText(int index)
+    {
+        if (collector.getCounter() > index )
+        {
+            String str = Double.toString(collector.getBlock(0).getOutputResult());
+            mouseTextLab.setText("   Value of connection is: " +str);
+        }
     }
 
 

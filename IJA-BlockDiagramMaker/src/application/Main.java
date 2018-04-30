@@ -21,7 +21,7 @@ public class Main extends Application {
 
         //Make scene full screen
         //Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        Scene scene = new Scene(root,  1000, 700);
+        Scene scene = new Scene(root,  1000, 730);
 
         primaryStage.setScene(scene);
         primaryStage.show();
