@@ -74,6 +74,13 @@ public class MainController {
     @FXML
     private TextField blockToRemove;
 
+    @FXML
+    private TextField dataBlockToRemove;
+
+    @FXML
+    private ChoiceBox<String> sideToRemove;
+
+
 
     public void addBlock(ActionEvent event)
     {
@@ -304,8 +311,60 @@ public class MainController {
 
             drawLabel();
         }
+    }
+
+    public void dataToRemove(ActionEvent event)
+    {
+        int index = Integer.parseInt(dataBlockToRemove.getText())-1;
+
+        if (sideToRemove.getValue() == null)
+        {
+            alertAdd("Missing side", "Please specify side!");
+            return;
+        }
+        String as = sideToRemove.getValue();
+        AbstractBlock block = collector.getBlock(index);
+        int flag =0;
+        switch (as)
+        {
+            case "a":
+                if (block.getA() == 0)
+                {
+                    flag = 1;
+                }
+                else
+                {
+                    collector.getBlock(index).setA(-1);
+                }
+            case "b":
+                if (block.getB() == 0)
+                {
+                    flag = 1;
+                }
+                else
+                {
+                    collector.getBlock(index).setA(-1);
+                }
+            case "c":
+                if (block.getC() == 0)
+                {
+                    flag = 1;
+                }
+                else
+                {
+                    collector.getBlock(index).setA(-1);
+                }
+        }
+
+        if (flag == 1)
+        {
+            alertAdd("Cannot be removed", "Side cannot be removed!");
+            return;
+        }
 
 
+        this.scheme.drawScene(this.collector);
+        drawLabel();
     }
 
     private void loadObjects()
@@ -338,6 +397,7 @@ public class MainController {
         String c = "c";
         asList.addAll(a,b,c);
         asPort.getItems().addAll(asList);
+        sideToRemove.getItems().addAll(asList);
     }
 
     private void alertAdd(String title, String header)
