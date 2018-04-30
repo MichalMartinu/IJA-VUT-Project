@@ -2,30 +2,25 @@ package triangle.operations;
 
 import triangle.TriangleObject;
 
-
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class TriangleArea extends TriangleObject{
+public class TriangleSum extends TriangleObject{
 
-    public TriangleArea() {
-        this.type = "Area";
+    public TriangleSum() {
+        this.type = "Sum";
     }
 
-    public void execute()
-    {
-
+    public void execute() {
         if (this.a > 0 && this.b > 0 && this.c > 0)
         {
             Double result;
-            Double s = (this.a+this.b+this.c)/2;
-
-            result = Math.sqrt(s*(s-this.a)*(s-this.b)*(s-this.c));
+            result = this.a + this.b + this.c;
             result = Math.round(result * 1000000d)/1000000d;
-
             this.state = "calculated";
             this.outputResult = result;
         }
+
     }
 
 

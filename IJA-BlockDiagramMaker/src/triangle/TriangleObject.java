@@ -22,9 +22,6 @@ public abstract class TriangleObject extends AbstractBlock{
     }
 
     public abstract void execute();
-
-    public void check() throws Exception {
-
-    }
+    
 
 }

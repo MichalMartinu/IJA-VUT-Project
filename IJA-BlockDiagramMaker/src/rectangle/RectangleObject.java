@@ -15,8 +15,4 @@ public abstract class RectangleObject extends AbstractBlock {
 
     public abstract void execute();
 
-    public void check() throws Exception {
-
-    }
-
 }

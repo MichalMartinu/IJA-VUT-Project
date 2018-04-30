@@ -150,9 +150,65 @@ public class MainController {
     }
 
     public void addSide(ActionEvent event) {
-        double a = Double.parseDouble(sideA.getText());
+        double a = -1,b = -1,c = -1;
+
+        if (!(sideA.getText().equals("")))
+        {
+            a = Double.parseDouble(sideA.getText());
+        }
+        if (!(sideB.getText().equals("")))
+        {
+            b = Double.parseDouble(sideB.getText());
+        }
+        if (!(sideC.getText().equals("")))
+        {
+            c = Double.parseDouble(sideC.getText());
+        }
+        if (sideBlock.getText().equals("") || Integer.parseInt(sideBlock.getText()) < 0 || Integer.parseInt(sideBlock.getText())-1 > collector.getCounter())
+        {
+            alertAdd("Invalid block", "Adding to invalid block number!");
+        }
+
         int blockNum = Integer.parseInt(sideBlock.getText())-1;
-        this.collector.changeBlockValue(blockNum, "a", a);
+        switch (collector.getBlock(blockNum).getObject())
+        {
+            case "Square":
+                if (b == -1 && c == -1 && a > 0)
+                {
+                    this.collector.changeBlockValue(blockNum, "a", a);
+
+                }
+                break;
+            case "Rectangle":
+                if (c == -1)
+                {
+                    if (a > 0)
+                    {
+                        this.collector.changeBlockValue(blockNum, "a", a);
+                    }
+                    if (b > 0)
+                    {
+                        this.collector.changeBlockValue(blockNum, "b", b);
+                    }
+
+                }
+                break;
+            case "Triangle":
+                if (a > 0)
+                {
+                    this.collector.changeBlockValue(blockNum, "a", a);
+                }
+                if (b > 0)
+                {
+                    this.collector.changeBlockValue(blockNum, "b", b);
+                }
+                if (c > 0)
+                {
+                    this.collector.changeBlockValue(blockNum, "c", c);
+                }
+                break;
+        }
+
         drawLabel();
     }
 
@@ -231,9 +287,9 @@ public class MainController {
         operationsList.removeAll();
         String a = "Area";
         String b = "Circumference";
-        String c = "Diagonal";
+        String c = "Div";
         String d = "Height";
-        String e = "Scale";
+        String e = "Sum";
         operationsList.addAll(a,b,c,d,e);
         operationAdd.getItems().addAll(operationsList);
     }
@@ -281,8 +337,18 @@ public class MainController {
              blockId = Integer.toString(i+1);
              outputText += "   Block number: " + blockId + "\n";
              outputText += "   Input data\n";
-             outputText += "       a: " + block.getA() + "\n"; //TODO na to udelat uni funkci
-             outputText += "   Reuslt: " + outputValue + "\n\n";
+             outputText += "       a: " + block.getA() + "\n";
+             if (collector.getBlock(i).getObject().equals("Rectangle"))
+             {
+                 outputText += "       b: " + block.getB() + "\n";
+             }
+            if (collector.getBlock(i).getObject().equals("Triangle"))
+            {
+                outputText += "       b: " + block.getB() + "\n";
+                outputText += "       c: " + block.getC() + "\n";
+            }
+
+             outputText += "   Result: " + outputValue + "\n\n";
          }
         dataBlock.setText(outputText);
     }

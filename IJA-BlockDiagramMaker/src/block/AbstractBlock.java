@@ -59,7 +59,6 @@ public abstract class AbstractBlock implements Block, Serializable{
 
     public abstract void execute();
 
-    public abstract void check() throws Exception;
 
     public double getA() {
         return a;

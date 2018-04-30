@@ -18,7 +18,7 @@ public class CollectorTests {
         AbstractBlock block;
         Collector blocksCollector = new Collector();
 
-        block = new SquareDiagonal();
+        block = new SquareDiv();
         blocksCollector.setBlock(block);
         block = new SquareArea();
         blocksCollector.setBlock(block);
@@ -60,7 +60,7 @@ public class CollectorTests {
         AbstractBlock block;
         Collector blocksCollector = new Collector();
 
-        block = new SquareDiagonal();
+        block = new SquareDiv();
         blocksCollector.setBlock(block);
         block = new SquareArea();
         blocksCollector.setBlock(block);
@@ -91,7 +91,7 @@ public class CollectorTests {
         AbstractBlock block;
         Collector blocksCollector = new Collector();
 
-        block = new SquareDiagonal();
+        block = new SquareDiv();
         blocksCollector.setBlock(block);
         block = new SquareArea();
         blocksCollector.setBlock(block);

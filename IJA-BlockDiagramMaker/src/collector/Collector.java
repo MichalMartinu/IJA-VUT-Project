@@ -29,6 +29,12 @@ public class Collector{
         if (type.equals("a")) {
             this.blocks.get(key).setA(value);
         }
+        if (type.equals("b")) {
+            this.blocks.get(key).setB(value);
+        }
+        if (type.equals("c")) {
+            this.blocks.get(key).setC(value);
+        }
     }
 
     public int getCounter() {
@@ -89,16 +95,19 @@ public class Collector{
                 getBlock(input).setInput(output);
             }*/
         }
-        //TODO Errror
 
-        if (as == "a" && getBlock(input).getA() == -1) {
-            getBlock(input).setA(0.0);
-        } else if (as == "b" && getBlock(input).getB() == -1) {
-            getBlock(input).setC(0.0);
-        } else if (as == "c" && getBlock(input).getC() == -1) {
-            getBlock(input).setC(0.0);
+        switch (as)
+        {
+            case "a":
+                getBlock(input).setA(0.0);
+                break;
+            case "b":
+                getBlock(input).setB(0.0);
+                break;
+            case "c":
+                getBlock(input).setC(0.0);
+                break;
         }
-        //TODO Error
     }
 
     public void next(){
@@ -107,19 +116,24 @@ public class Collector{
         for (AbstractBlock block : this.blocks) {
             if (block.getState().equals("waiting")) {
                 block.execute();
-            } else if (block.getState().equals("calculated") && block.getOutput() != -1) {
+            }
+            else if (block.getState().equals("calculated") && block.getOutput() != -1) {
                 tmpBlock = this.blocks.get(block.getOutput());
+
                 if (block.getOutputAs().equals("a")) {
                     tmpBlock.setA(block.getOutputResult());
-                } else if (block.getOutputAs().equals("b")) {
+                }
+                else if (block.getOutputAs().equals("b")) {
                     tmpBlock.setB(block.getOutputResult());
-                } else if (block.getOutputAs().equals("c")) {
+                }
+                else if (block.getOutputAs().equals("c")) {
                     tmpBlock.setC(block.getOutputResult());
                 }
 
                 this.blocks.set(block.getOutput(), tmpBlock);
                 block.setState("done");
-            } else if (block.getState().equals("calculated")) {
+            }
+            else if (block.getState().equals("calculated")) {
                 block.setState("done");
             }
         }

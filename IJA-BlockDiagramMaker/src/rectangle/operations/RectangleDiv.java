@@ -5,10 +5,9 @@ import rectangle.RectangleObject;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class RectangleArea extends RectangleObject {
-
-    public RectangleArea() {
-        this.type = "Area";
+public class RectangleDiv extends RectangleObject {
+    public RectangleDiv() {
+        this.type = "Div";
     }
 
     public void execute()
@@ -16,11 +15,13 @@ public class RectangleArea extends RectangleObject {
         if (this.a > 0 && this.b > 0)
         {
             Double result;
-            result = this.a * this.b;
+            result = this.a / this.b;
             result = Math.round(result * 1000000d)/1000000d;
             this.outputResult = result;
             this.state = "calculated";
         }
     }
 
+
 }
+

@@ -18,12 +18,12 @@ public class BlockOperations {
                         return new SquareArea();
                     case "Circumference":
                         return new SquareCircumference();
-                    case "Diagonal":
-                        return new SquareDiagonal();
+                    case "Div":
+                        return new SquareDiv();
                     case "Height":
                         return new SquareHeight();
-                    case "Scale":
-                        return new SquareScale(0);
+                    case "Sum":
+                        return new SquareSum();
                 }
             case "Rectangle":
                 switch (operation)
@@ -32,12 +32,12 @@ public class BlockOperations {
                         return new RectangleArea();
                     case "Circumference":
                         return new RectangleCircumference();
-                    case "Diagonal":
-                        return new RectangleDiagonal();
+                    case "Div":
+                        return new RectangleDiv();
                     case "Height":
                         return new RectangleHeight();
-                    case "Scale":
-                        return new RectangleScale();
+                    case "Sum":
+                        return new RectangleSum();
                 }
                 break;
             case "Triangle":
@@ -47,12 +47,12 @@ public class BlockOperations {
                         return new TriangleArea();
                     case "Circumference":
                         return new TriangleCircumference();
-                    case "Diagonal":
-                        return new TriangleGetAngle();
+                    case "Div":
+                        return new TriangleDiv();
                     case "Height":
                         return new TriangleHeight();
-                    case "Scale":
-                        return new TriangleScale();
+                    case "Sum":
+                        return new TriangleSum();
                 }
         }
         return null;

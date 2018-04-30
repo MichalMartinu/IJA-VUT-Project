@@ -6,8 +6,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class TriangleHeight extends TriangleObject {
-    private double result;
-    private String side;
+    private String side = "a";
 
     public TriangleHeight() {
         this.type = "Height";
@@ -16,26 +15,32 @@ public class TriangleHeight extends TriangleObject {
 
     public void execute()
     {
-        double angle;
 
-        if(this.side == "a")
+        if (this.a > 0 && this.b > 0 && this.c > 0)
         {
-            angle = LawOfCosine(this.b, this.a, this.c); //Delta
-            this.result = Math.sin(angle)*this.c;
-        }
-        else if(this.side == "b")
-        {
-            angle = LawOfCosine(this.c, this.a, this.b); //Beta
-            this.result = Math.sin(angle)*this.a;
-        }
-        else if(this.side == "c")
-        {
-            angle = LawOfCosine(this.a, this.b, this.c); //Alpha
-            this.result = Math.sin(angle)*this.b;
-        }
+            double angle;
+            Double result = 0.0;
 
-        this.result = Math.round(this.result * 1000000d)/1000000d;
+            if(this.side.equals("a"))
+            {
+                angle = LawOfCosine(this.b, this.a, this.c); //Delta
+                result = Math.sin(angle)*this.c;
+            }
+            else if(this.side.equals("b"))
+            {
+                angle = LawOfCosine(this.c, this.a, this.b); //Beta
+                result = Math.sin(angle)*this.a;
+            }
+            else if(this.side.equals("c"))
+            {
+                angle = LawOfCosine(this.a, this.b, this.c); //Alpha
+                result = Math.sin(angle)*this.b;
+            }
 
+            result = Math.round(result * 1000000d)/1000000d;
+            this.state = "calculated";
+            this.outputResult = result;
+        }
     }
 
     private double LawOfCosine(double a, double b, double c)

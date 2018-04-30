@@ -15,9 +15,17 @@ public class TriangleCircumference extends TriangleObject{
 
     public void execute()
     {
-        this.result = this.a+this.b+this.c;
-        this.result = Math.round(this.result * 1000000d)/1000000d;
+        Double result;
+
+        if (this.a > 0 && this.b > 0 && this.c > 0)
+        {
+            result = this.a+this.b+this.c;
+            result = Math.round(result * 1000000d)/1000000d;
+            this.state = "calculated";
+            this.outputResult = result;
+        }
     }
+
 
 
 }

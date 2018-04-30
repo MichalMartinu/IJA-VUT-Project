@@ -5,6 +5,6 @@ import java.util.SortedMap;
 public interface Block {
 
 
-    public void execute();
+    void execute();
 
 }

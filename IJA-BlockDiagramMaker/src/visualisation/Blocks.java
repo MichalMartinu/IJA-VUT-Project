@@ -28,10 +28,10 @@ public class Blocks {
                     output.add("|IN|  Circumference |OUT|");
                     output.add("|-----------------------|");
                     break;
-                case "Diagonal":
+                case "Div":
                     output.add("|-----------------------|");
                     output.add("|         Square        |");
-                    output.add("|IN|     Diagonal   |OUT|");
+                    output.add("|IN|       Div      |OUT|");
                     output.add("|-----------------------|");
                     break;
                 case "Height":
@@ -40,10 +40,10 @@ public class Blocks {
                     output.add("|IN|      Height    |OUT|");
                     output.add("|-----------------------|");
                     break;
-                case "Scale":
+                case "Sum":
                     output.add("|-----------------------|");
                     output.add("|         Square        |");
-                    output.add("|IN|      Scale     |OUT|");
+                    output.add("|IN|       Sum      |OUT|");
                     output.add("|-----------------------|");
                     break;
 
@@ -66,10 +66,10 @@ public class Blocks {
                     output.add("|IN|  Circumference |OUT|");
                     output.add("|-----------------------|");
                     break;
-                case "Diagonal":
+                case "Div":
                     output.add("|-----------------------|");
                     output.add("|        Rectangle      |");
-                    output.add("|IN|     Diagonal   |OUT|");
+                    output.add("|IN|        Div     |OUT|");
                     output.add("|-----------------------|");
                     break;
                 case "Height":
@@ -78,10 +78,10 @@ public class Blocks {
                     output.add("|IN|      Height    |OUT|");
                     output.add("|-----------------------|");
                     break;
-                case "Scale":
+                case "Sum":
                     output.add("|-----------------------|");
                     output.add("|        Rectangle      |");
-                    output.add("|IN|      Scale     |OUT|");
+                    output.add("|IN|        Sum     |OUT|");
                     output.add("|-----------------------|");
                     break;
 
@@ -104,10 +104,10 @@ public class Blocks {
                     output.add("|IN|  Circumference |OUT|");
                     output.add("|-----------------------|");
                     break;
-                case "Diagonal":
+                case "Div":
                     output.add("|-----------------------|");
                     output.add("|        Triangle       |");
-                    output.add("|IN|     Diagonal   |OUT|");
+                    output.add("|IN|       Div      |OUT|");
                     output.add("|-----------------------|");
                     break;
                 case "Height":
@@ -116,10 +116,10 @@ public class Blocks {
                     output.add("|IN|      Height    |OUT|");
                     output.add("|-----------------------|");
                     break;
-                case "Scale":
+                case "Sum":
                     output.add("|-----------------------|");
                     output.add("|        Triangle       |");
-                    output.add("|IN|      Scale     |OUT|");
+                    output.add("|IN|        Sum     |OUT|");
                     output.add("|-----------------------|");
                     break;
 

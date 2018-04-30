@@ -5,22 +5,23 @@ import rectangle.RectangleObject;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class RectangleArea extends RectangleObject {
+public class RectangleSum extends RectangleObject{
 
-    public RectangleArea() {
-        this.type = "Area";
+    public RectangleSum() {
+        this.type = "Sum";
     }
 
-    public void execute()
-    {
+    public void execute() {
         if (this.a > 0 && this.b > 0)
         {
             Double result;
-            result = this.a * this.b;
+            result = this.a + this.b;
             result = Math.round(result * 1000000d)/1000000d;
-            this.outputResult = result;
             this.state = "calculated";
+            this.outputResult = result;
         }
+
     }
+
 
 }
