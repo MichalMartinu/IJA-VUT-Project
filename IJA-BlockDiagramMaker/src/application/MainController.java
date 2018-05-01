@@ -18,6 +18,7 @@ import javafx.stage.FileChooser;
 
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.util.ArrayList;
 
 public class MainController {
     private Collector collector;
@@ -84,6 +85,9 @@ public class MainController {
     @FXML
     private Label mouseTextLab;
 
+    @FXML
+    private TextField outputDelete;
+
 
 
     public void addBlock(ActionEvent event)
@@ -108,6 +112,28 @@ public class MainController {
         drawLabel();
     }
 
+    public void runProgram(ActionEvent event)
+    {
+        int flag = 0;
+        for (int i = 0; i < collector.getCounter()+1; i++)
+        {
+            flag = nextStep(event);
+            if (flag == 1)
+            {
+                return;
+            }
+        }
+        for (int i = 0; i < collector.getCounter(); i++)
+        {
+            if (collector.getBlock(i).getOutput() == -1)
+            {
+                informationAdd("Result", "Result is: "+collector.getBlock(i).getOutputResult());
+                return;
+            }
+        }
+
+    }
+
     public void connectBlock(ActionEvent event)
     {
         if (!(inputPort.getText().matches("[0-9]+") && outputPort.getText().matches("[0-9]+")))
@@ -123,8 +149,16 @@ public class MainController {
         }
 
 
+
         int input = Integer.parseInt(inputPort.getText())-1;
         int output = Integer.parseInt(outputPort.getText())-1;
+
+        if (input == output)
+        {
+            alertAdd("Same block", "Cannoct connect only one block!");
+            return;
+        }
+
         String as = asPort.getValue();
 
         //Cycle detection
@@ -155,9 +189,6 @@ public class MainController {
         this.scheme.drawScene(this.collector);
         drawLabel();
 
-
-
-        //this.collector.setConnection();
     }
 
     public void addSide(ActionEvent event) {
@@ -233,8 +264,23 @@ public class MainController {
     public void removeBlock(ActionEvent event){
         int index = Integer.parseInt(blockToRemove.getText())-1;
         int blockIndex = collector.getBlock(index).getOutput();
-        collector.getBlock(blockIndex).removeBlock();
+
+        if (collector.getBlock(index).getOutput() != -1)
+        {
+            collector.getBlock(blockIndex).removeBlock();
+        }
+        if (collector.getBlock(index).getMaxInput() != -1)
+        {
+            ArrayList<Integer> port = collector.getBlock(index).getInputArray();
+            for (int i = 1; i< port.size(); i++)
+            {
+                collector.getBlock(port.get(i)).setOutput(-1);
+
+            }
+        }
         collector.delete(index);
+
+
         this.scheme.drawScene(this.collector);
         drawLabel();
     }
@@ -246,7 +292,22 @@ public class MainController {
         drawLabel();
     }
 
-    public void nextStep(ActionEvent event){
+    public void removeConnection(ActionEvent event)
+    {
+        int blockNum = Integer.parseInt(outputDelete.getText())-1;
+        if (collector.getBlock(blockNum).getOutput() == -1)
+        {
+            alertAdd("Nothing to delete", "No connection to delete!");
+
+        }
+        int index = collector.getBlock(blockNum).getOutput();
+        collector.getBlock(index).removeInput(blockNum);
+        collector.getBlock(blockNum).setOutput(-1);
+        this.scheme.drawScene(this.collector);
+        drawLabel();
+    }
+
+    public int nextStep(ActionEvent event){
         AbstractBlock block;
         int flag = 0;
 
@@ -279,13 +340,14 @@ public class MainController {
             if(flag == 1)
             {
                 alertAdd("Missing values", "Please add all missing value where side is -1 into blocks!");
-                return;
+                return 1;
             }
         }
 
         this.collector.next();
         this.scheme.drawScene(this.collector);
         drawLabel();
+        return 0;
     }
 
     public void saveFile(ActionEvent event) throws IOException {
@@ -371,7 +433,7 @@ public class MainController {
         drawLabel();
     }
 
-    public void mosueDeleteValue()
+    public void mouseDeleteValue()
     {
         mouseTextLab.setText("   Value of connection is: ");
     }
@@ -394,11 +456,6 @@ public class MainController {
     public void mouseShowValue4()
     {
         setMouseText(3);
-    }
-
-    public void mouseShowValue5()
-    {
-        setMouseText(4);
     }
 
     private void loadObjects()
@@ -441,6 +498,15 @@ public class MainController {
         a.setHeaderText(header);
         a.setTitle(title);
         a.showAndWait();
+    }
+
+    private void informationAdd(String title, String header)
+    {
+        Alert i =  new Alert(Alert.AlertType.INFORMATION);
+        i.setTitle(title);
+        i.setHeaderText(header);
+        i.setTitle(title);
+        i.showAndWait();
     }
 
     private void addData()
@@ -498,9 +564,9 @@ public class MainController {
 
     private void setMouseText(int index)
     {
-        if (collector.getCounter() > index )
+        if (collector.getCounter() > index && collector.getBlock(index).getOutput() != -1)
         {
-            String str = Double.toString(collector.getBlock(0).getOutputResult());
+            String str = Double.toString(collector.getBlock(index).getOutputResult());
             mouseTextLab.setText("   Value of connection is: " +str);
         }
     }
