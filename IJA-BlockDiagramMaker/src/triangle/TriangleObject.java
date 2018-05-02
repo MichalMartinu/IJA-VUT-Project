@@ -11,7 +11,6 @@ public abstract class TriangleObject extends AbstractBlock{
 
     /**
      * Checks if the object has correct values
-     * @throws Exception Object pops up error when values aren't assigned
      */
     protected TriangleObject() {
         this.a = -1.0;

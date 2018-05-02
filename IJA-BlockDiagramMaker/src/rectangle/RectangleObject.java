@@ -9,10 +9,9 @@ import java.util.SortedMap;
 public abstract class RectangleObject extends AbstractBlock {
 
     /**
-     * Checks if the object has correct values
-     * @throws Exception Object pops up error when values aren't assigned
-     */
-    public RectangleObject() {
+    * Checks if the object has correct values
+    */
+    protected RectangleObject() {
         this.a = -1.0;
         this.b = -1.0;
         this.state = "waiting";
