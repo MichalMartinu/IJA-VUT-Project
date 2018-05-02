@@ -5,7 +5,16 @@ import collector.Collector;
 
 import java.util.ArrayList;
 
+/**
+ * Visual representation of block connection
+ */
 public class Lines {
+
+    /**
+     * Return visual representation of input line
+     * @param block block in scheme
+     * @return input line visualisation
+     */
     public static ArrayList<String> inputLine(AbstractBlock block)
     {
         int input = block.getMaxInput();
@@ -31,6 +40,13 @@ public class Lines {
         return output;
     }
 
+    /**
+     * Return visual representation of output line
+     * @param block block in scheme
+     * @param type type of line
+     * @param outputIndex of output block
+     * @return output line visualisation
+     */
     public static ArrayList<String> leftLine(AbstractBlock block, String type, int outputIndex)
     {
         int inputPort = block.getMaxInput();
@@ -99,44 +115,35 @@ public class Lines {
         return output;
     }
 
+    /**
+     * Make empty connection on whole scheme
+     * @param collector scheme to edit
+     * @return new visualisation
+     */
     public static ArrayList<String> emptyConnection(Collector collector){
         ArrayList<String> output = new ArrayList<String>();
         AbstractBlock block;
         int j = 0;
         for (int i = 0; i < collector.getCounter(); i++)
         {
-            block=collector.getBlock(i);
-
             output.add("  ");
             output.add("  ");
             output.add("  ");
             output.add("  ");
             output.add("  ");
             output.add("  ");
-
-
-
-            /*if(block.getOutput() < i && block.getMaxInput() != -1)
-            {
-                output.set(j+4, "");
-            }
-            else
-            {
-                if (block.getMaxInput() != -1)
-                {
-                    output.set(j+4, "");
-                }
-            }*/
-
-
 
             j+=6;
-
         }
 
         return output;
     }
 
+    /**
+     * Set len of input line
+     * @param len length of line
+     * @return new visualisation
+     */
     private static String lenOfLine(int len)
     {
         String output = "";

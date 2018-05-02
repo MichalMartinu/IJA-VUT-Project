@@ -20,6 +20,9 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * GUI controller
+ * */
 public class MainController {
     private Collector collector;
     private DrawScheme scheme;
@@ -27,8 +30,10 @@ public class MainController {
     private ObservableList<String> objectList = FXCollections.observableArrayList();
     private ObservableList<String> operationsList = FXCollections.observableArrayList();
     private ObservableList<String> asList = FXCollections.observableArrayList();
-    //public static final ObservableList data = FXCollections.observableArrayList();
 
+    /**
+     * Initialize variables and default scheme
+     * */
 
     public void initialize()
     {
@@ -37,7 +42,6 @@ public class MainController {
         loadObjects();
         loadOperations();
         loadSides();
-        //dataBlock = new ListView();
     }
 
     @FXML
@@ -89,7 +93,10 @@ public class MainController {
     private TextField outputDelete;
 
 
-
+    /**
+     * Add block into scheme and draw new sheme
+     * @param event when button is pressed
+     */
     public void addBlock(ActionEvent event)
     {
         String object = objectAdd.getValue();
@@ -112,6 +119,10 @@ public class MainController {
         drawLabel();
     }
 
+    /**
+     * Execute all operations a show result
+     * @param event when button is pressed
+     */
     public void runProgram(ActionEvent event)
     {
         int flag = 0;
@@ -127,18 +138,33 @@ public class MainController {
         {
             if (collector.getBlock(i).getOutput() == -1)
             {
-                informationAdd("Result", "Result is: "+collector.getBlock(i).getOutputResult());
-                return;
+                informationAdd("Result", "Result of block " + (i+1)+" is: "+collector.getBlock(i).getOutputResult());
             }
         }
 
     }
 
+    /**
+     * Connect two block
+     * @param event when button is pressed
+     */
     public void connectBlock(ActionEvent event)
     {
         if (!(inputPort.getText().matches("[0-9]+") && outputPort.getText().matches("[0-9]+")))
         {
             alertAdd("Wrong ports", "Fill all ports by numbers!");
+            return;
+        }
+
+        if (Integer.parseInt(inputPort.getText()) <= 0 || Integer.parseInt(inputPort.getText()) > collector.getCounter())
+        {
+            alertAdd("Invalid block", "Invalid block number!");
+            return;
+        }
+
+        if (Integer.parseInt(outputPort.getText()) <= 0 || Integer.parseInt(outputPort.getText()) > collector.getCounter())
+        {
+            alertAdd("Invalid block", "Invalid block number!");
             return;
         }
 
@@ -155,11 +181,68 @@ public class MainController {
 
         if (input == output)
         {
-            alertAdd("Same block", "Cannoct connect only one block!");
+            alertAdd("Same block", "Cannot connect only one block!");
             return;
         }
 
+        if (collector.getBlock(input).getOutput() != -1)
+        {
+            alertAdd("Cannot connect", "Cannot connect output is already specified!");
+            return;
+        }
+
+
         String as = asPort.getValue();
+        int flag = 0;
+
+        switch (collector.getBlock(output).getObject())
+        {
+            case "Square":
+                if (as.equals("b") || as.equals("c"))
+                {
+                    flag =1;
+                }
+                break;
+            case "Rectangle":
+                if (as.equals("c"))
+                {
+                    flag =1;
+                }
+                break;
+        }
+        if(flag == 1)
+        {
+            alertAdd("Wrong side", "Wrong side of connection!");
+            return;
+        }
+
+
+        switch (as)
+        {
+            case "a":
+                if (collector.getBlock(output).getA() != -1)
+                {
+                    flag =1;
+                }
+                break;
+            case "b":
+                if (collector.getBlock(output).getB() != -1)
+                {
+                    flag =1;
+                }
+                break;
+            case "c":
+                if (collector.getBlock(output).getC() != -1)
+                {
+                    flag =1;
+                }
+                break;
+        }
+        if(flag == 1)
+        {
+            alertAdd("Cannot connect", "Side is already specified!");
+            return;
+        }
 
         //Cycle detection
 
@@ -169,7 +252,7 @@ public class MainController {
             return;
         }
 
-        int flag = 0;
+        flag = 0;
         for (int i = 0; i<collector.getCounter(); i++)
         {
             if(collector.getBlock(i).getOutput() == -1)
@@ -191,8 +274,13 @@ public class MainController {
 
     }
 
+    /**
+     * Add specified data into block
+     * @param event when button is pressed
+     */
     public void addSide(ActionEvent event) {
         double a = -1,b = -1,c = -1;
+        int flag = 0;
 
         if (!(sideA.getText().equals("")))
         {
@@ -220,6 +308,10 @@ public class MainController {
                     this.collector.changeBlockValue(blockNum, "a", a);
 
                 }
+                else
+                {
+                    flag = 1;
+                }
                 break;
             case "Rectangle":
                 if (c == -1)
@@ -231,6 +323,10 @@ public class MainController {
                     if (b > 0)
                     {
                         this.collector.changeBlockValue(blockNum, "b", b);
+                    }
+                    if (c != -1)
+                    {
+                        flag = 1;
                     }
 
                 }
@@ -249,11 +345,25 @@ public class MainController {
                     this.collector.changeBlockValue(blockNum, "c", c);
                 }
                 break;
+                default:
+                    alertAdd("Cannot add data", "Cannot add data into block!");
+                    return;
+
+
+        }
+        if (flag == 1)
+        {
+            alertAdd("Invalid side of block", "Adding data into invalid side of block!");
+            return;
         }
 
         drawLabel();
     }
 
+    /**
+     * Reset whole scheme
+     * @param event when button is pressed
+     */
     public void resetScheme(ActionEvent event)
     {
         collector = new Collector();
@@ -261,7 +371,25 @@ public class MainController {
         drawLabel();
     }
 
+    /**
+     * Remove block from scheme
+     * @param event when button is pressed
+     */
     public void removeBlock(ActionEvent event){
+
+        if (!(blockToRemove.getText().matches("[0-9]+")))
+        {
+            alertAdd("Wrong ports", "Fill all ports by numbers!");
+            return;
+        }
+
+        if (Integer.parseInt(blockToRemove.getText()) <= 0 || Integer.parseInt(blockToRemove.getText()) > collector.getCounter())
+        {
+            alertAdd("Invalid block", "Deleting to invalid block number!");
+            return;
+        }
+
+
         int index = Integer.parseInt(blockToRemove.getText())-1;
         int blockIndex = collector.getBlock(index).getOutput();
 
@@ -285,6 +413,10 @@ public class MainController {
         drawLabel();
     }
 
+    /**
+     * Reset all blocks to default values
+     * @param event when button is pressed
+     */
     public void resetBlocks(ActionEvent event)
     {
         collector.reset();
@@ -292,12 +424,30 @@ public class MainController {
         drawLabel();
     }
 
+    /**
+     * Remove connection of specified block
+     * @param event when button is pressed
+     */
     public void removeConnection(ActionEvent event)
     {
+
+        if (!(outputDelete.getText().matches("[0-9]+")))
+        {
+            alertAdd("Wrong port", "Fill port by number!");
+            return;
+        }
+
+        if (Integer.parseInt(outputDelete.getText()) <= 0 || Integer.parseInt(outputDelete.getText()) > collector.getCounter())
+        {
+            alertAdd("Invalid block", "Deleting invalid block number!");
+            return;
+        }
+
         int blockNum = Integer.parseInt(outputDelete.getText())-1;
         if (collector.getBlock(blockNum).getOutput() == -1)
         {
             alertAdd("Nothing to delete", "No connection to delete!");
+            return;
 
         }
         int index = collector.getBlock(blockNum).getOutput();
@@ -308,6 +458,11 @@ public class MainController {
         drawLabel();
     }
 
+    /**
+     * Execute operations step by step
+     * @param event when button is pressed
+     * @return value 1 when there is nothing more to execute
+     */
     public int nextStep(ActionEvent event){
         AbstractBlock block;
         int flag = 0;
@@ -351,6 +506,11 @@ public class MainController {
         return 0;
     }
 
+    /**
+     * Save scheme into specified folder with specified name
+     * @param event when menu button is pressed
+     * @throws IOException when there is no file
+     */
     public void saveFile(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
@@ -364,6 +524,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Loads scheme in specified folder with specified name
+     * @param event when menu button is pressed
+     * @throws IOException when there is no file
+     */
     public void openFile(ActionEvent event) throws IOException, ClassNotFoundException {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
@@ -380,8 +545,25 @@ public class MainController {
         }
     }
 
+    /**
+     * Remove specified data from block
+     * @param event when button is pressed
+     */
     public void dataToRemove(ActionEvent event)
     {
+
+        if (!(dataBlockToRemove.getText().matches("[0-9]+")))
+        {
+            alertAdd("Wrong port", "Fill port by number!");
+            return;
+        }
+
+        if (Integer.parseInt(dataBlockToRemove.getText()) <= 0 || Integer.parseInt(dataBlockToRemove.getText()) > collector.getCounter())
+        {
+            alertAdd("Invalid block", "Deleting invalid block number!");
+            return;
+        }
+
         int index = Integer.parseInt(dataBlockToRemove.getText())-1;
 
         if (sideToRemove.getValue() == null)
@@ -403,17 +585,13 @@ public class MainController {
                 {
                     collector.getBlock(index).setA(-1);
                 }
+                break;
             case "b":
                 if (block.getB() == 0)
                 {
                     flag = 1;
                 }
-                else
-                {
-                    collector.getBlock(index).setA(-1);
-                }
-            case "c":
-                if (block.getC() == 0)
+                else if (block.getObject().equals("Square"))
                 {
                     flag = 1;
                 }
@@ -421,6 +599,21 @@ public class MainController {
                 {
                     collector.getBlock(index).setA(-1);
                 }
+                break;
+            case "c":
+                if (block.getC() == 0)
+                {
+                    flag = 1;
+                }
+                else if (block.getObject().equals("Square") || block.getObject().equals("Rectangle"))
+                {
+                    flag = 1;
+                }
+                else
+                {
+                    collector.getBlock(index).setA(-1);
+                }
+                break;
         }
 
         if (flag == 1)
@@ -434,31 +627,49 @@ public class MainController {
         drawLabel();
     }
 
+    /**
+     * Delete mouse shown vale
+     */
     public void mouseDeleteValue()
     {
         mouseTextLab.setText("   Value of connection is: ");
     }
 
+    /**
+     * Show connection value
+     */
     public void mouseShowValue()
     {
         setMouseText(0);
     }
 
+    /**
+     * Show connection value
+     */
     public void mouseShowValue2()
     {
         setMouseText(1);
     }
 
+    /**
+     * Show connection value
+     */
     public void mouseShowValue3()
     {
         setMouseText(2);
     }
 
+    /**
+     * Show connection value
+     */
     public void mouseShowValue4()
     {
         setMouseText(3);
     }
 
+    /**
+     * Load object into list
+     */
     private void loadObjects()
     {
         objectList.removeAll();
@@ -469,6 +680,9 @@ public class MainController {
         objectAdd.getItems().addAll(objectList);
     }
 
+    /**
+     * Load operations into list
+     */
     private void loadOperations()
     {
         operationsList.removeAll();
@@ -481,6 +695,9 @@ public class MainController {
         operationAdd.getItems().addAll(operationsList);
     }
 
+    /**
+     * Load sides into list
+     */
     private void loadSides()
     {
         asList.removeAll();
@@ -492,6 +709,11 @@ public class MainController {
         sideToRemove.getItems().addAll(asList);
     }
 
+    /**
+     * Show allert banner
+     * @param title title of banner
+     * @param header header of banner
+     */
     private void alertAdd(String title, String header)
     {
         Alert a =  new Alert(Alert.AlertType.ERROR);
@@ -501,6 +723,11 @@ public class MainController {
         a.showAndWait();
     }
 
+    /**
+     * Show information banner
+     * @param title title of banner
+     * @param header header of banner
+     */
     private void informationAdd(String title, String header)
     {
         Alert i =  new Alert(Alert.AlertType.INFORMATION);
@@ -510,47 +737,51 @@ public class MainController {
         i.showAndWait();
     }
 
+    /**
+     * Add data into block on specified side
+     */
     private void addData()
     {
-        //dataBlock.getChildren().clear();
         AbstractBlock block;
         String blockId;
         String outputValue ;
-        String State;
-
-
 
         String outputText = "";
 
         for (int i = 0; i <  this.collector.getCounter(); i++) {
-            //System.out.println( this.collector.getBlock(i));
-             block = collector.getBlock(i);
-             outputValue = Double.toString(block.getOutputResult());
-             if (outputValue.equals("-1"))
-             {
-                 outputValue = "waiting for output";
-             }
+            block = collector.getBlock(i);
+            outputValue = Double.toString(block.getOutputResult());
 
-             blockId = Integer.toString(i+1);
-             outputText += "   Block number: " + blockId + "\n";
-             outputText += "   Input data\n";
-             outputText += "       a: " + block.getA() + "\n";
-             if (collector.getBlock(i).getObject().equals("Rectangle"))
-             {
-                 outputText += "       b: " + block.getB() + "\n";
-             }
+            if (outputValue.equals("-1"))
+            {
+                outputValue = "waiting for output";
+            }
+
+            blockId = Integer.toString(i+1);
+            outputText += "   Block number: " + blockId + "\n";
+            outputText += "   Input data\n";
+            outputText += "       a: " + block.getA() + "\n";
+
+            if (collector.getBlock(i).getObject().equals("Rectangle"))
+            {
+                outputText += "       b: " + block.getB() + "\n";
+            }
+
             if (collector.getBlock(i).getObject().equals("Triangle"))
             {
                 outputText += "       b: " + block.getB() + "\n";
                 outputText += "       c: " + block.getC() + "\n";
             }
 
-             outputText += "   Result: " + outputValue + "\n\n";
+            outputText += "   Result: " + outputValue + "\n\n";
          }
         dataBlock.setText(outputText);
     }
 
 
+    /**
+     * Draw ascii representation of scheme
+     */
     private void drawLabel()
     {
         String listString = "\n";
@@ -563,6 +794,10 @@ public class MainController {
         addData();
     }
 
+    /**
+     * Show value of connection
+     * @param index index of connection
+     */
     private void setMouseText(int index)
     {
         if (collector.getCounter() > index && collector.getBlock(index).getOutput() != -1)
@@ -571,6 +806,4 @@ public class MainController {
             mouseTextLab.setText("   Value of connection is: " +str);
         }
     }
-
-
 }

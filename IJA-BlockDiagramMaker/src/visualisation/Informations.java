@@ -4,7 +4,17 @@ import block.AbstractBlock;
 
 import java.util.ArrayList;
 
+/**
+ * Visual representation of block informations
+ */
 public class Informations {
+
+    /**
+     * Return specified data visualisation
+     * @param block block in scheme
+     * @param index index of block in scheme
+     * @return visual representation of block data
+     */
     public static ArrayList<String> data(AbstractBlock block, int index)
     {
         ArrayList<String> output = new ArrayList<String>();

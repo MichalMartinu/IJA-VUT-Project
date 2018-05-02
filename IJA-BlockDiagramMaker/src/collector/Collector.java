@@ -6,25 +6,43 @@ import block.AbstractBlock;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Collector of all blocks in scheme
+ */
 public class Collector{
     private ArrayList<AbstractBlock> blocks = new ArrayList<>();
-    //private ArrayList<AbstractBlock> backup = new ArrayList<AbstractBlock>();
-    private int counter;
     private int flagFirst;
-    //protected SortedMap<String, AbstractBlock> blocks = new TreeMap<>();
 
+    /**
+     * Initialization of collector
+     */
     public Collector() {
         this.flagFirst = 0;
     }
 
+    /**
+     * Add block into collector
+     * @param block block to add
+     */
     public void setBlock(AbstractBlock block) {
         this.blocks.add(block);
     }
 
+    /**
+     * Get block from collector
+     * @param key index block
+     * @return block
+     */
     public AbstractBlock getBlock(int key) {
         return this.blocks.get(key);
     }
 
+    /**
+     * Change specified value of block
+     * @param key index of block in collector
+     * @param type side of block
+     * @param value new value
+     */
     public void changeBlockValue(int key, String type, Double value){
         if (type.equals("a")) {
             this.blocks.get(key).setA(value);
@@ -37,10 +55,17 @@ public class Collector{
         }
     }
 
+    /**
+     * @return size of collector
+     */
     public int getCounter() {
         return blocks.size();
     }
 
+    /**
+     * Delete specified block in collector
+     * @param index index of block to delete
+     */
     public void delete(int index){
         AbstractBlock block;
         block = blocks.get(index);
@@ -78,6 +103,9 @@ public class Collector{
 
     }
 
+    /**
+     * Reset all blocks
+     */
     public void reset()
     {
       for (int i = 0; i <  this.blocks.size(); i++) {
@@ -85,15 +113,17 @@ public class Collector{
         }
     }
 
-
+    /**
+     * Create new connection between two blocks
+     * @param output output port
+     * @param input input port
+     * @param as side of connection
+     */
     public void setConnection(int output, int input, String as) {
         if (output < blocks.size() && input < blocks.size()) {
             getBlock(output).setOutputAs(as);
             getBlock(output).setOutput(input);
             getBlock(input).addInput(output);
-            /*if (getBlock(input).getMaxInput() < output) {
-                getBlock(input).setInput(output);
-            }*/
         }
 
         switch (as)
@@ -110,6 +140,9 @@ public class Collector{
         }
     }
 
+    /**
+     * Execute one step in scheme
+     */
     public void next(){
         AbstractBlock tmpBlock;
 
@@ -140,6 +173,11 @@ public class Collector{
         }
     }
 
+    /**
+     * Save collector into file
+     * @param fileName path of file
+     * @throws IOException when cant save into file
+     */
     public void save(File fileName) throws IOException {
         FileOutputStream fos = new FileOutputStream(fileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -147,6 +185,11 @@ public class Collector{
         oos.close();
     }
 
+    /**
+     * Load collector from file
+     * @param fileName path of file
+     * @throws IOException when cant load into file
+     */
     public void read(File fileName) throws IOException, ClassNotFoundException {
         ArrayList<AbstractBlock> save = new ArrayList<AbstractBlock>();
         FileInputStream fis = new FileInputStream(fileName);

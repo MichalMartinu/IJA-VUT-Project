@@ -4,8 +4,16 @@ import block.AbstractBlock;
 
 import java.util.ArrayList;
 
+/**
+ * Visual representation of blocks
+ */
 public class Blocks {
 
+    /**
+     * Return visual representation of specified blocks
+     * @param block block to visualise
+     * @return block visualisation
+     */
     public static ArrayList<String> getBlock(AbstractBlock block)
     {
         String mObject = block.getObject();
