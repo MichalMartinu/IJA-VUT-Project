@@ -7,7 +7,6 @@
 <property name="doc" value="doc"/>
 <property name="build" value="build"/>
 <property name="lib" value="lib"/>
-<property name="java.home" value="/usr/lib/jvm/java-1.8.0-openjdk-amd64"/>
 
     <target name="compile" depends="build,jar" />
 
@@ -20,6 +19,12 @@
             <fileset dir="src"
                      includes="fxml/main.fxml" />
         </copy>
+        <copy todir="${build}">
+            <fileset dir="src"
+                     includes="fxml/application.css" />
+        </copy>
+        <copy file="lib/LUCON.TTF" todir="build/fxml"/>
+        <copy file="lib/SegoeUI.ttf" todir="build/fxml"/>
 
         <javac includeantruntime="false" srcdir="${src}" destdir="${build}" classpath="${lib}/junit-4.12.jar"/>
  </target>
@@ -33,11 +38,11 @@
             </manifest>
         </jar>
     </target>
-     
+
  <target name="doc" depends="compile" description="Generate javadoc">
      <javadoc sourcepath="${src}" destdir="${doc}" classpath="${build}"/>
  </target>
- 
+
     <target name="run">
         <java jar="${dest}/IJA-VUT-Project.jar" fork="true"/>
     </target>
