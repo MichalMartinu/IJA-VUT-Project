@@ -300,6 +300,13 @@ public class MainController {
         }
 
         int blockNum = Integer.parseInt(sideBlock.getText())-1;
+
+        AbstractBlock block = collector.getBlock(blockNum);
+        if((a >0 && block.getA() != -1) || (b >0 && block.getB() != -1) || (c >0 && block.getC() != -1))
+        {
+            alertAdd("Cannot add side", "Cannot add side!");
+        }
+
         switch (collector.getBlock(blockNum).getObject())
         {
             case "Square":
