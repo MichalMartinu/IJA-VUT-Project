@@ -5,13 +5,20 @@ import triangle.TriangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating area of triangle
+ */
 public class TriangleArea extends TriangleObject{
-
+    /**
+     * Setting type of operation for triangle object
+     */
     public TriangleArea() {
         this.type = "Area";
     }
 
+    /**
+     * runs calculation area of triangle object
+     */
     public void execute()
     {
 

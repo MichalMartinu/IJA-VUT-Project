@@ -189,6 +189,7 @@ public class Collector{
      * Load collector from file
      * @param fileName path of file
      * @throws IOException when cant load into file
+     * @throws ClassNotFoundException Class doesn't exist
      */
     public void read(File fileName) throws IOException, ClassNotFoundException {
         ArrayList<AbstractBlock> save = new ArrayList<AbstractBlock>();

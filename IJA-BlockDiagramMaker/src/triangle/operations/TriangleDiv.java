@@ -4,13 +4,19 @@ import triangle.TriangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating div of triangle
+ */
 public class TriangleDiv extends TriangleObject {
-
+    /**
+     * Setting type of operation for triangle object
+     */
     public TriangleDiv() {
         this.type = "Div";
     }
-
+    /**
+     * runs calculation div of triangle object
+     */
     public void execute() {
         if (this.a > 0 && this.b > 0 && this.c > 0)
         {

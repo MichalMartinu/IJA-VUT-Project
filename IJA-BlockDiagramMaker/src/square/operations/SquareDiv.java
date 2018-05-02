@@ -1,13 +1,19 @@
 package square.operations;
 
 import square.SquareObject;
-
+/**
+ * Calculating div of rectangle
+ */
 public class SquareDiv extends SquareObject {
-
+    /**
+     * Setting type of operation for square object
+     */
     public SquareDiv(){
         this.type = "Div";
     }
-
+    /**
+     * runs calculation div of square object
+     */
     public void execute()
     {
         if (this.a != -1 && this.a != 0)

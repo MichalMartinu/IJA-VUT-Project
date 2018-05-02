@@ -3,7 +3,7 @@
 <project name ="IJA-VUT-Project" default="compile" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
 
 <property name="src" value="src"/>
-<property name="dest" value="dest"/>
+<property name="dest" value="dest-client"/>
 <property name="doc" value="doc"/>
 <property name="build" value="build"/>
 <property name="lib" value="lib"/>
@@ -39,6 +39,6 @@
  </target>
  
     <target name="run">
-        <java jar="dest/IJA-VUT-Project.jar" fork="true"/>
+        <java jar="${dest}/IJA-VUT-Project.jar" fork="true"/>
     </target>
 </project>

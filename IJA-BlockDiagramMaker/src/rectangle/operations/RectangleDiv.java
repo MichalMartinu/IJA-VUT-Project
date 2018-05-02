@@ -4,12 +4,20 @@ import rectangle.RectangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating div of rectangle
+ */
 public class RectangleDiv extends RectangleObject {
+    /**
+     * Setting type of operation for rectangle object
+     */
     public RectangleDiv() {
         this.type = "Div";
     }
 
+    /**
+     * runs calculation div of rectangle object
+     */
     public void execute()
     {
         if (this.a > 0 && this.b > 0)

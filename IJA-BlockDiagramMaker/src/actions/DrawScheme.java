@@ -246,6 +246,7 @@ public class DrawScheme {
      * @param index index of string which is going to be modified
      * @param replace replacing char
      * @param str modifying string
+     * @return final string
      * */
     public String replaceString(String str, int index, char replace){
         if(str==null){

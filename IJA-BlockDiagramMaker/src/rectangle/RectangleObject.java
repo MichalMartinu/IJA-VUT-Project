@@ -3,9 +3,15 @@ package rectangle;
 import block.AbstractBlock;
 
 import java.util.SortedMap;
-
+/**
+ * Initialization of Rectangle object
+ */
 public abstract class RectangleObject extends AbstractBlock {
 
+    /**
+     * Checks if the object has correct values
+     * @throws Exception Object pops up error when values aren't assigned
+     */
     public RectangleObject() {
         this.a = -1.0;
         this.b = -1.0;

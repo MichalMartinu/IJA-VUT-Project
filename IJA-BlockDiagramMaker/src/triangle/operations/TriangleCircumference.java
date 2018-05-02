@@ -4,15 +4,20 @@ import triangle.TriangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating circumference of triangle
+ */
 public class TriangleCircumference extends TriangleObject{
-    private double result;
-
+    /**
+     * Setting type of operation for triangle object
+     */
     public TriangleCircumference() {
         this.type = "Circumference";
     }
 
-
+    /**
+     * runs calculation circumference of triangle object
+     */
     public void execute()
     {
         Double result;

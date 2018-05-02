@@ -4,12 +4,20 @@ import rectangle.RectangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating height of rectangle
+ */
 public class RectangleHeight extends RectangleObject{
+    /**
+     * Setting type of operation for rectangle object
+     */
     public RectangleHeight() {
         this.type = "Height";
     }
 
+    /**
+     * runs calculation height of rectangle object
+     */
     public void execute()
     {
         if (this.a > 0 && this.b > 0)

@@ -2,13 +2,21 @@ package square.operations;
 
 import square.SquareObject;
 
+/**
+ * Calculating area of rectangle
+ */
 public class SquareArea extends SquareObject {
 
+    /**
+     * Setting type of operation for square object
+     */
     public SquareArea() {
         this.type = "Area";
     }
 
-
+    /**
+     * runs calculation area of square object
+     */
     public void execute()
     {
         if (this.a != -1 && this.a != 0)

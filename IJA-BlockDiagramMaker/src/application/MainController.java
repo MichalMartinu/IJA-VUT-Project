@@ -528,10 +528,11 @@ public class MainController {
      * Loads scheme in specified folder with specified name
      * @param event when menu button is pressed
      * @throws IOException when there is no file
+     * @throws ClassNotFoundException class doesn't exist
      */
     public void openFile(ActionEvent event) throws IOException, ClassNotFoundException {
         FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
+        fc.getExtensionFilters().addAll();
         File selectedFile = fc.showOpenDialog(null);
 
         if(selectedFile != null)

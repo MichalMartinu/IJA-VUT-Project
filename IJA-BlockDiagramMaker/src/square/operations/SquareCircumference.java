@@ -1,13 +1,19 @@
 package square.operations;
 
 import square.SquareObject;
-
+/**
+ * Calculating circumference of rectangle
+ */
 public class SquareCircumference extends SquareObject{
-
+    /**
+     * Setting type of operation for square object
+     */
     public SquareCircumference() {
         this.type = "Circumference";
     }
-
+    /**
+     * runs calculation circumference of square object
+     */
     public void execute()
     {
         if (this.a != -1 && this.a != 0)

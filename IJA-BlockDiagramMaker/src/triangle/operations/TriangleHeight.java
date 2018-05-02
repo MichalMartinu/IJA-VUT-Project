@@ -4,15 +4,21 @@ import triangle.TriangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating height of triangle
+ */
 public class TriangleHeight extends TriangleObject {
     private String side = "a";
-
+    /**
+     * Setting type of operation for triangle object
+     */
     public TriangleHeight() {
         this.type = "Height";
     }
 
-
+    /**
+     * runs calculation height of triangle object
+     */
     public void execute()
     {
 
@@ -43,6 +49,13 @@ public class TriangleHeight extends TriangleObject {
         }
     }
 
+    /**
+     * helper function for cosine
+     * @param a side a of triangle
+     * @param b side b of triangle
+     * @param c side c of triangle
+     * @return angle of alpha a
+     */
     private double LawOfCosine(double a, double b, double c)
     {
         double result = (Math.pow(b,2)+Math.pow(c,2)-Math.pow(a,2))/(2*b*c);

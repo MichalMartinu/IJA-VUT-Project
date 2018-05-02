@@ -4,13 +4,20 @@ import rectangle.RectangleObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating sum of rectangle
+ */
 public class RectangleSum extends RectangleObject{
-
+    /**
+     * Setting type of operation for rectangle object
+     */
     public RectangleSum() {
         this.type = "Sum";
     }
 
+    /**
+     * runs calculation sum of rectangle object
+     */
     public void execute() {
         if (this.a > 0 && this.b > 0)
         {

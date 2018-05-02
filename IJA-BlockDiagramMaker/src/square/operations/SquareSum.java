@@ -4,13 +4,19 @@ import square.SquareObject;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
-
+/**
+ * Calculating sum of rectangle
+ */
 public class SquareSum extends SquareObject{
-
+    /**
+     * Setting type of operation for square object
+     */
     public SquareSum() {
         this.type = "Sum";
     }
-
+    /**
+     * runs calculation sum of square object
+     */
     public void execute() {
         if (this.a > 0)
         {
