@@ -31,9 +31,12 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
 
 
+
         primaryStage.setTitle("ASCII Block scheme maker");
 
         Scene scene = new Scene(root,  1000, 730);
+        scene.getStylesheets().add("/fxml/application.css");
+
 
         primaryStage.setScene(scene);
         primaryStage.show();

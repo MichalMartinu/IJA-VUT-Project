@@ -1,0 +1,18 @@
+@font-face {
+    src: url("LUCON.TTF");
+}
+
+@font-face {
+     src: url("SegoeUI.ttf");
+ }
+
+.text-area {
+ -fx-font-family: "Lucida Console";
+}
+
+.root{
+ -fx-font-size: 12px;
+ -fx-font-family: "Segoe UI";
+
+}
+
