@@ -217,6 +217,30 @@ public class MainController {
         }
 
 
+
+        //Cycle detection
+
+        if(collector.getBlock(output).getOutput() == input)
+        {
+            alertAdd("Cycle", "Cycle detected between block "+(input+1)+" and "+(output+1));
+            return;
+        }
+
+        flag = 0;
+        for (int i = 0; i<collector.getCounter(); i++)
+        {
+            if(collector.getBlock(i).getOutput() == -1)
+            {
+                flag += 1;
+            }
+        }
+
+        if(flag <= 1)
+        {
+            alertAdd("Cycle", "Cycle detected between whole scheme!");
+            return;
+        }
+
         switch (as)
         {
             case "a":
@@ -244,28 +268,6 @@ public class MainController {
             return;
         }
 
-        //Cycle detection
-
-        if(collector.getBlock(output).getOutput() == input)
-        {
-            alertAdd("Cycle", "Cycle detected between block "+(input+1)+" and "+(output+1));
-            return;
-        }
-
-        flag = 0;
-        for (int i = 0; i<collector.getCounter(); i++)
-        {
-            if(collector.getBlock(i).getOutput() == -1)
-            {
-                flag += 1;
-            }
-        }
-
-        if(flag <= 1)
-        {
-            alertAdd("Cycle", "Cycle detected between whole scheme!");
-            return;
-        }
 
 
         collector.setConnection(input,output,as);
