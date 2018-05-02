@@ -24,17 +24,16 @@ import java.util.ArrayList;
  * GUI controller
  * */
 public class MainController {
-    private Collector collector;
-    private DrawScheme scheme;
+    private Collector collector;    //All blocks in scheme
+    private DrawScheme scheme;      //Visual representation of scheme
 
-    private ObservableList<String> objectList = FXCollections.observableArrayList();
-    private ObservableList<String> operationsList = FXCollections.observableArrayList();
-    private ObservableList<String> asList = FXCollections.observableArrayList();
+    private ObservableList<String> objectList = FXCollections.observableArrayList();        //List of possible objects
+    private ObservableList<String> operationsList = FXCollections.observableArrayList();    //List of possible operation
+    private ObservableList<String> asList = FXCollections.observableArrayList();            //List of possible sides
 
     /**
      * Initialize variables and default scheme
      * */
-
     public void initialize()
     {
         collector = new Collector();
@@ -99,8 +98,8 @@ public class MainController {
      */
     public void addBlock(ActionEvent event)
     {
-        String object = objectAdd.getValue();
-        String operation = operationAdd.getValue();
+        String object = objectAdd.getValue();       //Type of object
+        String operation = operationAdd.getValue(); //Type of operations
 
         if (object == null || operation == null)
         {
@@ -113,9 +112,8 @@ public class MainController {
         block = BlockOperations.getType(object,operation);
         this.collector.setBlock(block);
 
+        //Draw scheme
         this.scheme.drawScene(this.collector);
-
-
         drawLabel();
     }
 
@@ -125,7 +123,9 @@ public class MainController {
      */
     public void runProgram(ActionEvent event)
     {
-        int flag = 0;
+        int flag = 0;   //Flag used when execution is finished
+
+        //Execute whole scheme
         for (int i = 0; i < collector.getCounter()+1; i++)
         {
             flag = nextStep(event);
@@ -134,6 +134,8 @@ public class MainController {
                 return;
             }
         }
+
+        //Show all results
         for (int i = 0; i < collector.getCounter(); i++)
         {
             if (collector.getBlock(i).getOutput() == -1)
@@ -150,41 +152,45 @@ public class MainController {
      */
     public void connectBlock(ActionEvent event)
     {
+        //Check if ports are number
         if (!(inputPort.getText().matches("[0-9]+") && outputPort.getText().matches("[0-9]+")))
         {
             alertAdd("Wrong ports", "Fill all ports by numbers!");
             return;
         }
 
+        //Check if number of block is valid block
         if (Integer.parseInt(inputPort.getText()) <= 0 || Integer.parseInt(inputPort.getText()) > collector.getCounter())
         {
             alertAdd("Invalid block", "Invalid block number!");
             return;
         }
 
+        //Check if number of block is valid block
         if (Integer.parseInt(outputPort.getText()) <= 0 || Integer.parseInt(outputPort.getText()) > collector.getCounter())
         {
             alertAdd("Invalid block", "Invalid block number!");
             return;
         }
 
+        //Check if as side is set
         if (asPort.getValue() == null)
         {
             alertAdd("Missing side", "Please specify side!");
             return;
         }
 
+        int input = Integer.parseInt(inputPort.getText())-1;    //Index of input port
+        int output = Integer.parseInt(outputPort.getText())-1;  //Index of output port
 
-
-        int input = Integer.parseInt(inputPort.getText())-1;
-        int output = Integer.parseInt(outputPort.getText())-1;
-
+        //Error when there is only one block set
         if (input == output)
         {
             alertAdd("Same block", "Cannot connect only one block!");
             return;
         }
 
+        //Error when block already has value
         if (collector.getBlock(input).getOutput() != -1)
         {
             alertAdd("Cannot connect", "Cannot connect output is already specified!");
@@ -192,9 +198,10 @@ public class MainController {
         }
 
 
-        String as = asPort.getValue();
-        int flag = 0;
+        String as = asPort.getValue();  //Side of output
+        int flag = 0;                   //Flag when error occurs is set to 1
 
+        //Check if input is valid
         switch (collector.getBlock(output).getObject())
         {
             case "Square":
@@ -219,7 +226,6 @@ public class MainController {
 
 
         //Cycle detection
-
         if(collector.getBlock(output).getOutput() == input)
         {
             alertAdd("Cycle", "Cycle detected between block "+(input+1)+" and "+(output+1));
@@ -241,6 +247,7 @@ public class MainController {
             return;
         }
 
+        //Check if block already has output value on all ports
         switch (as)
         {
             case "a":
@@ -268,8 +275,7 @@ public class MainController {
             return;
         }
 
-
-
+        //Draw scheme
         collector.setConnection(input,output,as);
         this.scheme.drawScene(this.collector);
         drawLabel();
@@ -281,18 +287,18 @@ public class MainController {
      * @param event when button is pressed
      */
     public void addSide(ActionEvent event) {
-        double a = -1,b = -1,c = -1;
-        int flag = 0;
+        double a = -1,b = -1,c = -1;    //Default sides values
+        int flag = 0;                   //When error occurs flag is set to 1
 
-        if (!(sideA.getText().equals("")))
+        if (!(sideA.getText().equals(""))) //Set side A when is on input
         {
             a = Double.parseDouble(sideA.getText());
         }
-        if (!(sideB.getText().equals("")))
+        if (!(sideB.getText().equals(""))) //Set side B when is on input
         {
             b = Double.parseDouble(sideB.getText());
         }
-        if (!(sideC.getText().equals("")))
+        if (!(sideC.getText().equals(""))) //Set side C when is on input
         {
             c = Double.parseDouble(sideC.getText());
         }
@@ -301,9 +307,10 @@ public class MainController {
             alertAdd("Invalid block", "Adding to invalid block number!");
         }
 
-        int blockNum = Integer.parseInt(sideBlock.getText())-1;
+        int blockNum = Integer.parseInt(sideBlock.getText())-1; //Get index of block
+        AbstractBlock block = collector.getBlock(blockNum); //Get block
 
-        AbstractBlock block = collector.getBlock(blockNum);
+        //Check if side already exist
         if((a >0 && block.getA() != -1) || (b >0 && block.getB() != -1) || (c >0 && block.getC() != -1))
         {
             alertAdd("Cannot add side", "Cannot add side!");
@@ -384,14 +391,16 @@ public class MainController {
      * Remove block from scheme
      * @param event when button is pressed
      */
-    public void removeBlock(ActionEvent event){
-
+    public void removeBlock(ActionEvent event)
+    {
+        //Check if block is number
         if (!(blockToRemove.getText().matches("[0-9]+")))
         {
             alertAdd("Wrong ports", "Fill all ports by numbers!");
             return;
         }
 
+        //Check if block index is legit
         if (Integer.parseInt(blockToRemove.getText()) <= 0 || Integer.parseInt(blockToRemove.getText()) > collector.getCounter())
         {
             alertAdd("Invalid block", "Deleting to invalid block number!");
@@ -399,13 +408,15 @@ public class MainController {
         }
 
 
-        int index = Integer.parseInt(blockToRemove.getText())-1;
-        int blockIndex = collector.getBlock(index).getOutput();
+        int index = Integer.parseInt(blockToRemove.getText())-1;    //Index of block
+        int blockIndex = collector.getBlock(index).getOutput();     //Block
 
         if (collector.getBlock(index).getOutput() != -1)
         {
             collector.getBlock(blockIndex).removeBlock();
         }
+
+        //When there is input delete all outputs on indexes of blocks of input ports
         if (collector.getBlock(index).getMaxInput() != -1)
         {
             ArrayList<Integer> port = collector.getBlock(index).getInputArray();
@@ -415,9 +426,10 @@ public class MainController {
 
             }
         }
-        collector.delete(index);
 
+        collector.delete(index); //Delete block
 
+        //Draw scheme
         this.scheme.drawScene(this.collector);
         drawLabel();
     }
@@ -439,30 +451,37 @@ public class MainController {
      */
     public void removeConnection(ActionEvent event)
     {
-
+        //Check if block is number
         if (!(outputDelete.getText().matches("[0-9]+")))
         {
             alertAdd("Wrong port", "Fill port by number!");
             return;
         }
 
+        //Check if block index is legit
         if (Integer.parseInt(outputDelete.getText()) <= 0 || Integer.parseInt(outputDelete.getText()) > collector.getCounter())
         {
             alertAdd("Invalid block", "Deleting invalid block number!");
             return;
         }
 
-        int blockNum = Integer.parseInt(outputDelete.getText())-1;
+        int blockNum = Integer.parseInt(outputDelete.getText())-1; //Get index of block
+
+        //When there is no output
         if (collector.getBlock(blockNum).getOutput() == -1)
         {
             alertAdd("Nothing to delete", "No connection to delete!");
             return;
 
         }
-        int index = collector.getBlock(blockNum).getOutput();
+
+        int index = collector.getBlock(blockNum).getOutput();   //Index of output block
+
         collector.getBlock(index).removeInput(blockNum);
         collector.getBlock(index).removeBlock();
         collector.getBlock(blockNum).setOutput(-1);
+
+        //Draw scheme
         this.scheme.drawScene(this.collector);
         drawLabel();
     }
@@ -473,13 +492,14 @@ public class MainController {
      * @return value 1 when there is nothing more to execute
      */
     public int nextStep(ActionEvent event){
-        AbstractBlock block;
-        int flag = 0;
+        AbstractBlock block;    //Block
+        int flag = 0;           //When error occurs flag is set to 1
 
         for (int i = 0; i<collector.getCounter(); i++)
         {
             block = collector.getBlock(i);
 
+            //Check if all values are set
             switch (block.getObject())
             {
                 case "Square":
@@ -509,7 +529,9 @@ public class MainController {
             }
         }
 
-        this.collector.next();
+        this.collector.next(); //Next step
+
+        //Draw scene
         this.scheme.drawScene(this.collector);
         drawLabel();
         return 0;
@@ -525,7 +547,8 @@ public class MainController {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
         File selectedFile = fc.showSaveDialog(null);
 
-        if(selectedFile != null) {
+        if(selectedFile != null)
+        {
             this.collector.save(selectedFile);
             this.scheme = new DrawScheme();
             this.scheme.drawScene(this.collector);
@@ -562,28 +585,33 @@ public class MainController {
     public void dataToRemove(ActionEvent event)
     {
 
+        //Check if block is number
         if (!(dataBlockToRemove.getText().matches("[0-9]+")))
         {
             alertAdd("Wrong port", "Fill port by number!");
             return;
         }
 
+        //Check if block index is legit
         if (Integer.parseInt(dataBlockToRemove.getText()) <= 0 || Integer.parseInt(dataBlockToRemove.getText()) > collector.getCounter())
         {
             alertAdd("Invalid block", "Deleting invalid block number!");
             return;
         }
 
-        int index = Integer.parseInt(dataBlockToRemove.getText())-1;
+        int index = Integer.parseInt(dataBlockToRemove.getText())-1; //Index of block
 
+        //Check if side is set
         if (sideToRemove.getValue() == null)
         {
             alertAdd("Missing side", "Please specify side!");
             return;
         }
-        String as = sideToRemove.getValue();
-        AbstractBlock block = collector.getBlock(index);
-        int flag =0;
+
+        String as = sideToRemove.getValue();                //Get value of as side
+        AbstractBlock block = collector.getBlock(index);    //Get block
+        int flag =0;                                        //Flag is set to 1 when error ocurs
+
         switch (as)
         {
             case "a":
@@ -632,7 +660,7 @@ public class MainController {
             return;
         }
 
-
+        //Draw scene
         this.scheme.drawScene(this.collector);
         drawLabel();
     }
@@ -752,13 +780,14 @@ public class MainController {
      */
     private void addData()
     {
-        AbstractBlock block;
-        String blockId;
-        String outputValue ;
+        AbstractBlock block;    //Block
+        String blockId;         //Id of block
+        String outputValue ;    //Output result
 
-        String outputText = "";
+        String outputText = ""; //
 
-        for (int i = 0; i <  this.collector.getCounter(); i++) {
+        for (int i = 0; i <  this.collector.getCounter(); i++)
+        {
             block = collector.getBlock(i);
             outputValue = Double.toString(block.getOutputResult());
 

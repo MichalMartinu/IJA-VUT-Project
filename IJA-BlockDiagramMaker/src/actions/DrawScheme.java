@@ -106,7 +106,7 @@ public class DrawScheme {
         int output =  block.getOutput();
 
         if (block.getOutput() > blockIndex)
-        {
+        { //When direction of connection is increasing
             direction="higher";
             for (int i = 0; i < blockIndex; i++) {
 
@@ -117,7 +117,7 @@ public class DrawScheme {
             }
         }
         else
-        {
+        { //When direction of connection is descending
             direction = "smaller";
             for (int i = 0; i < block.getOutput(); i++) {
 
@@ -129,19 +129,17 @@ public class DrawScheme {
         }
 
 
-
-        block = collector.getBlock(blockIndex);
-
+        block = collector.getBlock(blockIndex); //Get block from collector
 
         if (direction.equals("higher")) {
-            type = "outD";
+            type = "outD"; //Output line down
             addToIndex(Lines.leftLine(block, type,blockIndex), index);
         } else {
-            type = "outP";
+            type = "outP"; //Output line up
             addToIndex(Lines.leftLine(block, type, blockIndex), index);
         }
 
-        type="full";
+        type="full"; //When needs to write full lines
         if (direction.equals("higher")) {
             for (int i = blockIndex+1; i < output; i++)
             {
@@ -156,19 +154,20 @@ public class DrawScheme {
             }
         }
 
-        block = collector.getBlock(blockIndex);
-        index = block.getOutput();
-        block = collector.getBlock(block.getOutput());
+        block = collector.getBlock(blockIndex);          //Get block from collector
+        index = block.getOutput();                       //Get index of block
+        block = collector.getBlock(block.getOutput());   //Replace block by output block
 
         if (direction.equals("higher")) {
-            type = "inP";
+            type = "inP";  //Input line up
             addToIndex(Lines.leftLine(block, type, blockIndex), index*6);
         } else {
 
-            type = "inD";
+            type = "inD";  //Input line down
             addToIndex(Lines.leftLine(block, type, blockIndex), index*6);
         }
 
+        //Fill scheme with empty lines on missing indexes
         if (direction.equals("higher"))
         {
             block = collector.getBlock(blockIndex);

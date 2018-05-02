@@ -9,19 +9,18 @@ import java.util.Collections;
  * Abstract block used in scheme as multiple types.
  * */
 public abstract class AbstractBlock implements Block, Serializable{
-    protected double a;
-    protected double b;
-    protected double c;
-    protected double outputResult;
+    protected double a;             //Side A of object
+    protected double b;             //Side B of object
+    protected double c;             //Side C of object
+    protected double outputResult;  //Result on output port
 
-    protected int output;
-    protected String outputAs;
-    private ArrayList<Integer> inputArray = new ArrayList<Integer>();
+    protected int output;                                         //Output port
+    protected String outputAs;                                    //Type of output side {a, b, c}
+    private ArrayList<Integer> inputArray = new ArrayList<Integer>();   //Array of input ports
 
-
-    protected String state;
-    protected String type;
-    protected String object;
+    protected String state;     //State of object {waiting, calculated, done}
+    protected String type;      //Type of operation
+    protected String object;    //Type of object
 
     /**
      * Initializes abstract block
@@ -34,7 +33,6 @@ public abstract class AbstractBlock implements Block, Serializable{
         b = -1;
         c = -1;
         state = "waiting";
-
     }
 
     /**
@@ -50,7 +48,6 @@ public abstract class AbstractBlock implements Block, Serializable{
             c = 0;
         }
         state = "waiting";
-
     }
 
     /**

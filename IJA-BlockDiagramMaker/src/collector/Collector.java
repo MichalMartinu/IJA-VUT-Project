@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * Collector of all blocks in scheme
  */
 public class Collector{
-    private ArrayList<AbstractBlock> blocks = new ArrayList<>();
-    private int flagFirst;
+    private ArrayList<AbstractBlock> blocks = new ArrayList<>();    //List of all blocks in collector
+    private int flagFirst;                                          //First iteration of collector
 
     /**
      * Initialization of collector
@@ -70,6 +70,7 @@ public class Collector{
         AbstractBlock block;
         block = blocks.get(index);
 
+        //Set all output block to default
         if(block.getOutput() != -1)
         {
             blocks.get(block.getOutput()).removeInput(index);
@@ -88,6 +89,7 @@ public class Collector{
             }
         }
 
+        //If there is any input, delete all connected blocks
         if(block.getMaxInput() != -1)
         {
             ArrayList<Integer> input = block.getInputArray();
@@ -146,6 +148,7 @@ public class Collector{
     public void next(){
         AbstractBlock tmpBlock;
 
+        //Loop over all blocks in collector and execute only blocks with all values
         for (AbstractBlock block : this.blocks) {
 
             if (block.getState().equals("waiting")) {

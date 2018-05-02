@@ -107,11 +107,6 @@ public class Lines {
             output.set(4, "");
         }
 
-        if (block.getOutput() == -1)
-        {
-            //output.set(5, "");
-        }
-
         return output;
     }
 
