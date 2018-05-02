@@ -302,6 +302,7 @@ public class MainController {
         }
         int index = collector.getBlock(blockNum).getOutput();
         collector.getBlock(index).removeInput(blockNum);
+        collector.getBlock(index).removeBlock();
         collector.getBlock(blockNum).setOutput(-1);
         this.scheme.drawScene(this.collector);
         drawLabel();

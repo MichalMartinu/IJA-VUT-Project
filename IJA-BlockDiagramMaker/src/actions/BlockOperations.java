@@ -5,8 +5,17 @@ import rectangle.operations.*;
 import square.operations.*;
 import triangle.operations.*;
 
+/**
+* Creates new object depends on type of operation
+*/
 public class BlockOperations {
 
+    /**
+     * Creates new object depends on type of operation
+     * @param object Type of object
+     * @param operation Object operation
+     * @return Returns new object depended on input parameters
+     */
     public static AbstractBlock getType(String object, String operation)
     {
         switch (object)

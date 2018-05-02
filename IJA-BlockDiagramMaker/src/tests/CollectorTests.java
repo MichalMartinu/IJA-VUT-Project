@@ -1,4 +1,4 @@
-package tests;
+/*package tests;
 
 import actions.DrawScheme;
 import block.AbstractBlock;
@@ -24,12 +24,12 @@ public class CollectorTests {
         blocksCollector.setBlock(block);
         block = new SquareHeight();
         blocksCollector.setBlock( block);
-       /* block = new SquareHeight();
-        blocksCollector.setBlock( block);
         block = new SquareHeight();
         blocksCollector.setBlock( block);
         block = new SquareHeight();
-        blocksCollector.setBlock( block);*/
+        blocksCollector.setBlock( block);
+        block = new SquareHeight();
+        blocksCollector.setBlock( block);
 
 
 
@@ -46,7 +46,7 @@ public class CollectorTests {
         //blocksCollector.setConnection(2,5, "a");
         /*blocksCollector.setConnection(2,2, "a");
         blocksCollector.setConnection(3,0, "a");
-        blocksCollector.setConnection(5,3, "a");*/
+        blocksCollector.setConnection(5,3, "a");
 
         //Assert.assertEquals(-1,blocksCollector.getBlock(1).getMaxInput());
 
@@ -54,7 +54,7 @@ public class CollectorTests {
         hej.drawScene(blocksCollector);
     }
 
-   /* @Test
+    @Test
     public void nextSimple()
     {
         AbstractBlock block;
@@ -120,8 +120,8 @@ public class CollectorTests {
 
         blocksCollector.next();
         Assert.assertEquals((String) "done",(String) blocksCollector.getBlock(2).getState());;
-    }*/
+    }
 
 
 }
-
+*/

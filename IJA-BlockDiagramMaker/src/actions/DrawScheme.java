@@ -10,10 +10,17 @@ import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+/**
+ * Class for drawing ASCII block schemes.
+ * */
 public class DrawScheme {
     private ArrayList<String> output = new ArrayList<String>();
 
-
+    /**
+     * Essential method for creating scheme. Uses other functions from this class
+     * to create blocks and connections between blocks.
+     * @param collector table of all blocks used in present scheme.
+     * */
     public void drawScene(Collector collector){
         output.clear();
 
@@ -65,22 +72,34 @@ public class DrawScheme {
             }
         }
 
-
-        /*for (int i = 0; i <  this.output.size(); i++) {
-            System.out.println( this.output.get(i));
-        }*/
     }
-
+    /**
+     * Creates index index and state of object (nothing, calculates, waiting).
+     * @param block block, which information is used
+     * @param blockIndex index of block in collector
+     * @param index actual index of line in text array
+     * */
     private void drawInformation(AbstractBlock block, int index, int blockIndex)
     {
         addBeforeIndex(Informations.data(block, blockIndex), index);
     }
 
-    public void drawConnectionLineIn(AbstractBlock block, int index){
+    /**
+     * Creates input line, graphic connection between blocks.
+     * @param block block, which information is used
+     * @param index actual index of line in text array
+     * */
+    private void drawConnectionLineIn(AbstractBlock block, int index){
         addToIndex(Lines.inputLine(block), index);
     }
 
-    public void drawConnectionLineLeft(Collector collector, int blockIndex, int index){
+    /**
+     * Draws output line of block.
+     * @param collector table of all blocks present in scheme.
+     * @param blockIndex creates connection from output block to highest input.
+     * @param index actual index of line in text array
+     * */
+    private void drawConnectionLineLeft(Collector collector, int blockIndex, int index){
         AbstractBlock block = collector.getBlock(blockIndex);
         String type;
         String direction;
@@ -172,13 +191,22 @@ public class DrawScheme {
 
     }
 
-
-    public void drawBlock(AbstractBlock block, int index)
+    /**
+     * Draws block.
+     * @param block block, which information is used
+     * @param index actual index of line in text array
+     * */
+    private void drawBlock(AbstractBlock block, int index)
     {
         addToIndex(Blocks.getBlock(block), index);
     }
 
-    public void addToIndex(ArrayList<String > item, int index)
+    /**
+     * Adds information about scheme to output variable.
+     * @param item part of block which is drew
+     * @param index actual index of line in text array
+     * */
+    private void addToIndex(ArrayList<String> item, int index)
     {
         int j = 0;
         for (int i = index; i<index+item.size(); i++)
@@ -187,7 +215,12 @@ public class DrawScheme {
         }
     }
 
-    public void addBeforeIndex(ArrayList<String > item, int index)
+    /**
+     * Adds information about scheme before output variable.
+     * @param item part of block which is drew
+     * @param index actual index of line in text array
+     * */
+    private void addBeforeIndex(ArrayList<String> item, int index)
     {
         int j = 0;
         for (int i = index; i<index+item.size(); i++)
@@ -196,13 +229,24 @@ public class DrawScheme {
         }
     }
 
-    public void initScene(int count){
+
+    /**
+     * Creates empty scene .
+     * @param count number of lines needed
+     * */
+    private void initScene(int count){
         for (int i = 0; i < count*6; i++)
         {
             this.output.add("");
         }
     }
 
+    /**
+     * Replaces char at index.
+     * @param index index of string which is going to be modified
+     * @param replace replacing char
+     * @param str modifying string
+     * */
     public String replaceString(String str, int index, char replace){
         if(str==null){
             return str;
@@ -214,6 +258,9 @@ public class DrawScheme {
         return String.valueOf(chars);
     }
 
+    /**
+     * @return returning complete scheme
+    * */
     public ArrayList<String> getOutput() {
         return output;
     }
