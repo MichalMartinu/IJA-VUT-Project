@@ -598,7 +598,7 @@ public class MainController {
                 }
                 else
                 {
-                    collector.getBlock(index).setA(-1);
+                    collector.getBlock(index).setB(-1);
                 }
                 break;
             case "c":
@@ -612,7 +612,7 @@ public class MainController {
                 }
                 else
                 {
-                    collector.getBlock(index).setA(-1);
+                    collector.getBlock(index).setC(-1);
                 }
                 break;
         }
