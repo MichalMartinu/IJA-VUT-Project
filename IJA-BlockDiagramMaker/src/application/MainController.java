@@ -706,6 +706,14 @@ public class MainController {
     }
 
     /**
+     * Show connection value
+     */
+    public void mouseShowValue5()
+    {
+        setMouseText(4);
+    }
+
+    /**
      * Load object into list
      */
     private void loadObjects()
