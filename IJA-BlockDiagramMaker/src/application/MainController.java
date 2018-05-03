@@ -546,7 +546,6 @@ public class MainController {
      */
     public void saveFile(ActionEvent event) throws IOException {
         FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Scheme","*.save"));
         File selectedFile = fc.showSaveDialog(null);
 
         if(selectedFile != null)
@@ -566,7 +565,6 @@ public class MainController {
      */
     public void openFile(ActionEvent event) throws IOException, ClassNotFoundException {
         FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().addAll();
         File selectedFile = fc.showOpenDialog(null);
 
         if(selectedFile != null)
