@@ -305,15 +305,17 @@ public class MainController {
         if (sideBlock.getText().equals("") || Integer.parseInt(sideBlock.getText()) < 0 || Integer.parseInt(sideBlock.getText())-1 > collector.getCounter())
         {
             alertAdd("Invalid block", "Adding to invalid block number!");
+            return;
         }
 
         int blockNum = Integer.parseInt(sideBlock.getText())-1; //Get index of block
         AbstractBlock block = collector.getBlock(blockNum); //Get block
 
         //Check if side already exist
-        if((a >0 && block.getA() != -1) || (b >0 && block.getB() != -1) || (c >0 && block.getC() != -1))
+        if((a > 0 && block.getA() == 0) || (b > 0 && block.getB() == 0) || (c > 0 && block.getC() == 0))
         {
             alertAdd("Cannot add side", "Cannot add side!");
+            return;
         }
 
         switch (collector.getBlock(blockNum).getObject())
