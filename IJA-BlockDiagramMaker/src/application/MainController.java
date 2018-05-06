@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 /**
  * GUI controller
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  * */
 public class MainController {
     private Collector collector;    //All blocks in scheme

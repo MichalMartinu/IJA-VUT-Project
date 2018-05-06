@@ -5,6 +5,8 @@ import block.AbstractBlock;
 import java.util.SortedMap;
 /**
  * Initialization of Rectangle object
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public abstract class RectangleObject extends AbstractBlock {
 

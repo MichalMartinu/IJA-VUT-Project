@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating sum of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class SquareSum extends SquareObject{
     /**

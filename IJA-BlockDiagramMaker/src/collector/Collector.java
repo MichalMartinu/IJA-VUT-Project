@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 /**
  * Collector of all blocks in scheme
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class Collector{
     private ArrayList<AbstractBlock> blocks = new ArrayList<>();    //List of all blocks in collector

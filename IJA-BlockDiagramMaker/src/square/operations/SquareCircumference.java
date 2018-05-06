@@ -3,6 +3,8 @@ package square.operations;
 import square.SquareObject;
 /**
  * Calculating circumference of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class SquareCircumference extends SquareObject{
     /**

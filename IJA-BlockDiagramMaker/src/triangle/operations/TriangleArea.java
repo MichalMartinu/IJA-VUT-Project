@@ -7,6 +7,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating area of triangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class TriangleArea extends TriangleObject{
     /**

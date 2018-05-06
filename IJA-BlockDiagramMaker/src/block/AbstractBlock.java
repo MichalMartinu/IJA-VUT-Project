@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 /**
  * Abstract block used in scheme as multiple types.
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  * */
 public abstract class AbstractBlock implements Block, Serializable{
     protected double a;             //Side A of object

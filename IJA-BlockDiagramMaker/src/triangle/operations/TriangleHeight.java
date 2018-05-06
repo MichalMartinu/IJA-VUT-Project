@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating height of triangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class TriangleHeight extends TriangleObject {
     private String side = "a";

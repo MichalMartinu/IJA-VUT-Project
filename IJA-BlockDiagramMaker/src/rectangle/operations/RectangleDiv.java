@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating div of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class RectangleDiv extends RectangleObject {
     /**

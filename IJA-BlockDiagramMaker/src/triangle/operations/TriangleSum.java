@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating sum of triangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class TriangleSum extends TriangleObject{
     /**

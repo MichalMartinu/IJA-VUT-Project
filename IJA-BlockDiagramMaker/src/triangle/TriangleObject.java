@@ -6,6 +6,8 @@ import java.util.SortedMap;
 
 /**
  * Initialization of triangle object
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public abstract class TriangleObject extends AbstractBlock{
 

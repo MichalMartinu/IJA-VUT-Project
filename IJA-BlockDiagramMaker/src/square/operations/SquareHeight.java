@@ -3,6 +3,8 @@ package square.operations;
 import square.SquareObject;
 /**
  * Calculating height of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class SquareHeight extends SquareObject {
     /**

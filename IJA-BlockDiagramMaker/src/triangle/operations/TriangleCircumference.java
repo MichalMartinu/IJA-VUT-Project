@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating circumference of triangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class TriangleCircumference extends TriangleObject{
     /**

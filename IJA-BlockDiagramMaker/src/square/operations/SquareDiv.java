@@ -3,6 +3,8 @@ package square.operations;
 import square.SquareObject;
 /**
  * Calculating div of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class SquareDiv extends SquareObject {
     /**

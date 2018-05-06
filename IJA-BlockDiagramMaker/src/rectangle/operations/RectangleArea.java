@@ -7,6 +7,8 @@ import java.util.TreeMap;
 
 /**
  * Calculating area of rectangle
+ *   @author Michal Martinů
+ *   @author Vojtěch Hromádka
  */
 public class RectangleArea extends RectangleObject {
     /**

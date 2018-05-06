@@ -7,6 +7,8 @@ import triangle.operations.*;
 
 /**
 * Creates new object depends on type of operation
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
 */
 public class BlockOperations {
 

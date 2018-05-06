@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating circumference of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class RectangleCircumference extends RectangleObject {
     /**

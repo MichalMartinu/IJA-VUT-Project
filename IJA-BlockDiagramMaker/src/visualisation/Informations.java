@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 /**
  * Visual representation of block informations
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class Informations {
 

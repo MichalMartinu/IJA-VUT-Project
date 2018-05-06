@@ -4,6 +4,8 @@ import square.SquareObject;
 
 /**
  * Calculating area of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class SquareArea extends SquareObject {
 

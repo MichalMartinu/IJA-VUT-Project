@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 /**
  * Visual representation of block connection
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class Lines {
 

@@ -6,6 +6,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 /**
  * Calculating height of rectangle
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class RectangleHeight extends RectangleObject{
     /**

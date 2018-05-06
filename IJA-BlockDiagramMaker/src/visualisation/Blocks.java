@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 /**
  * Visual representation of blocks
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  */
 public class Blocks {
 

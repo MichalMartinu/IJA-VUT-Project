@@ -12,6 +12,8 @@ import java.util.TreeMap;
 
 /**
  * Class for drawing ASCII block schemes.
+ * @author Michal Martinů
+ * @author Vojtěch Hromádka
  * */
 public class DrawScheme {
     private ArrayList<String> output = new ArrayList<String>();
